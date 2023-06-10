@@ -6,16 +6,38 @@
     font-family: david;
     src: url("David Sans Condensed.ttf")
   }
-  body {background-color: #101010}
+  .background-text {
+    font-family: david;
+    border: 0px;
+    color: #074007;
+    font-size: 12px;
+  body {
+    background-color: #101010
+  }
   div {
     font-family: david;
     border: 0px;
     color: lime;
     font-size: 24px;
-    text-shadow: 0 0 25px green;
+    text-shadow: 0 0 25px lime;
     text-align: center;
 }  
 </style>
   <div> hi </div>
 </body>
+<script>
+  var randomString = generateString(512);
+  
+  function generateString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/\%<>-_#@*+~?=()[]{}:;';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+</script>
 </html>
