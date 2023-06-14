@@ -146,11 +146,34 @@ t8YQHFJ9wHOWClFKWwE5yNcKuzBwJtTqNoKwj72l8dnEJN4BCG
 dr7Ns6aiJ5DHS1KInvg2Lqu8F7jBiOgFVkvb2hXfMX7iueFd0D
 vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     </div>
-    <div class=regular>hi!
-    this is a short test string.
-    i just wanna see if the depth perspective works at all</div>
+    <div class=regular id=type></div>
   </div>
 </body>
 <script>
+  
+  var i = 0 
+  var txt = `hi! 
+  this is a short test string.
+  i just wanna see if the depth perspective works at all
+  ` // text to be typewritten
+  var min = 40 // minimum time per character (ms)
+  var max = 60 // maximum time per character (ms)
+  
+  // function for typewriting
+  function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("type").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, getRandomArbitrary());
+  }
+}
+  // random integer between min and max
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  
+  window.onload = typeWriter()
+  
 </script>
 </html>
