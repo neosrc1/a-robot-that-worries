@@ -154,7 +154,8 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
 <script>
   
   // declare variables -- text here
-  var i = 0 
+  var i = 0
+  var i2 = 0
   var txt = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
   The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.
   
@@ -208,9 +209,9 @@ One last look around, and then my vision fades away.`
   
   // insta-typewriting function, called during typeWriter()
   function typeWriterInstant() {
-  if (i < txt2.length) {
-    document.getElementById("entries").innerHTML += txt2.charAt(i);
-    i++;
+  if (i2 < txt2.length) {
+    document.getElementById("entries").innerHTML += txt2.charAt(i2);
+    i2++;
     setTimeout(typeWriterInstant, 1);
   }
 }
