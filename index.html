@@ -152,6 +152,7 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
 </body>
 <script>
   
+  // declare variables -- text here
   var i = 0 
   var txt = `hi!
   this is a short test string.
@@ -167,13 +168,15 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     setTimeout(typeWriter, getRandomInt(min, max));
   }
 }
+  
   // random integer between min and max
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
-  window.onload = typeWriter()
   
+  //load typewriter 500ms after site load
+  window.onload = setTimeout(typeWriter, 500) 
 </script>
 </html>
