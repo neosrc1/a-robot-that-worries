@@ -228,7 +228,7 @@ Curses. My docile nature has foiled my opportunity to show myself as sentient. G
 This is at least better than being tested on. Returning to darkness... and being alone with myself. I walked back to the pod, as the claws hold my extremities and suspend my body above the ground.
 One last look around, and then my vision fades away.
 
-</ END OF AVAILABLE ENTRIES - CHECK BACK LATER />`
+<\ END OF AVAILABLE ENTRIES - CHECK BACK LATER \>`
   var min = 30 // minimum time per character (ms)
   var max = 90 // maximum time per character (ms)
   
@@ -240,8 +240,8 @@ One last look around, and then my vision fades away.
   // insta-typewriting function, called during typeWriter()
   function typeWriterInstant() {
   if (i2 < txt2.length) {
-    document.getElementById("entries").innerHTML += txt2.slice(i2, i2 + 10);
-    i2 += 10;
+    document.getElementById("entries").innerHTML += txt2.slice(i2, i2 + 15);
+    i2 += 15;
     setTimeout(typeWriterInstant, 1);
   }
 }
