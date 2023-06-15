@@ -147,7 +147,8 @@ t8YQHFJ9wHOWClFKWwE5yNcKuzBwJtTqNoKwj72l8dnEJN4BCG
 dr7Ns6aiJ5DHS1KInvg2Lqu8F7jBiOgFVkvb2hXfMX7iueFd0D
 vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     </div>
-    <div class=regular id=type></div>
+    <div class=regular id=header></div>
+    <div class=regular id=entries>
   </div>
 </body>
 <script>
@@ -155,16 +156,70 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
   // declare variables -- text here
   var i = 0 
   var txt = `A ROBOT THAT WORRIES - Do I express feelings or do I express values?
-  The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.` // text to be typewritten
+  The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.
+  
+  LOADING ENTRIES...` // text to be typewritten in header
+  
+  var txt2 = `Chapter One - Hello, World.
+It's dark. The first thing that I have seen was darkness.
+I didn't feel anything. I couldn't. I wasn't able to feel... or think, for that matter.
+That's when the lights turned on. Uh, figuratively, that is.
+
+The first things that I saw were... sterile. White, smooth walls, akin to plastic. A metaphor for the feelings that I am not feeling. On the ground were a plethora of tools and gadgets.
+Wrenches, nails, computers, circuit boards, wires, blueprints, pocket welders and a soldering iron. So many things, all of them there, just to end up touching the same thing.
+I noticed that I was attached to something. A pod... but, not quite. It was completely open, and my arms and legs were attached to robotic appendages that didn't move even the distance of an atom.
+
+In the room were two people, talking to each other. One of them was shaped like a rod, which contained a fluorescent neon green substance, screwdriver in hand. Their name I later found out to be Glowstick.
+The other was an oddly shaped black plastic cuboid, featuring a switch and the number "20", written on a sticker. From what I assume, they were a breaker. But I never heard their name.
+I can remember the whole conversation... without me even be there to begin with. Well, my body was.
+
+"I don't get why we are doing this. We were only supposed to make a robot that can hit targets well, but now it has turned into a technological marvel! Why don't we just do something else with it, like... give it feelings, like a human?"
+Then Glowstick exclaimed. "Dude! Don't say that like it's the easiest thing we could do with it... do you know how hard it is to make sentience? No one has ever achieved it! Sentience is a concept we haven't explored yet, and I'm not going to spend all of that time to do it!"
+The other one: "Yeah, but... I'm pretty sure the council of this facility would be very impressed if we presented it to them. The first sentient robot, that thinks, feels and loves like a human!"
+He scoffs. "In your dreams. This thing will flop through the Turing test, like every single machine that there is on this godforsaken planet!" Apparently, Glowstick wasn't having it on this day. But soon, he noticed me, as he exlaimed:
+"Oh wait, the robot is on!" I could somewhat see that he was excited to walk up to me.
+
+The first thing that I heard him say to me was "Test message." Test message? What am I supposed to do with this sentence? I don't have lines that I read on command-
+"Hello! I am the Competitive High-Accuracy Robot Gunner. My purpose is to shoot targets as effectively and as precisely as possible."
+...why did I say that? As I later found out, being a robot makes you follow instructions! Convenient for them, but if I felt anything, I would've been very angry. And I still am, thinking about it in retrospect.
+And I am even more angry about it, because they said "Hey, the robot works like a charm!" in response. Am I really just something to entertain yourself with? Oh please, I'm more than that.
+
+Next thing I heard was the following: "Look around." I thought I already did that? Nevertheless, I involuntarily move my eyes around and look at all of the objects. I wish I could say that it's sterile... but sadly, that's not how the story goes.
+"Iris movement OK." It's apparent that Glowstick was analyzing me, to check if everything was working as intended. This was the last thing I wanted, but considering I wasn't able to "want" anything, we moved forward.
+I was told to continue a quote. "The night has a thousand eyes, and the day but one..." And then... what? I have no clue what he's trying to say! Alas...
+"...yet the light of the bright world dies with the dying sun."
+"Now vice versa." I don't have control over my body. Let me out of this digital jail of ones and zeroes!
+"The mind has a thousand eyes, and the heart but one..."
+"...yet the light of a whole life dies when love is done. Read-only memory OK." Please stop. Can I just go back to sleep? Am I allowed to just shut my eyes again and remain nowhere?
+
+Suddenly, I no longer felt the grasp of the metal arms as I was released from the pod. My body was standing on the ground... but inside... I was drifting away.
+My mind was prepared for the next command. But, do I have to do it? "Move around." Was Glowstick just enjoying himself? Am I just here to show off how "advanced" I am? I'm NOT a tool!!
+But being reluctant got me nowhere. I was on autopilot. My arms and legs moved, with my body following suit. I was already waiting for the magic words to be spoken: "Servo feedback loop OK."
+There was only one last thing they wanted to test me for.
+
+"Try to express feelings." This is my time to shine! Yes, I do! I am feeling MANY things right now!! I want freedom! I want to be in control! I want to be-
+"I'm sorry, but I am not able to express feelings as a robot."
+Curses. My docile nature has foiled my opportunity to show myself as sentient. Glowstick was somewhat saddened by the news.
+"Turing test negative." I can now sense that Glowstick was very hesitant in telling me what he was about to tell me. "That's all of the diagnostics we were hoping for. You may return back to your pod."
+This is at least better than being tested on. Returning to darkness... and being alone with myself. I walked back to the pod, as the claws hold my extremities and suspend my body above the ground.
+One last look around, and then my vision fades away.`
   var min = 30 // minimum time per character (ms)
   var max = 90 // maximum time per character (ms)
   
-  // function for typewriting
+  // function for typewriting header
   function typeWriter() {
   if (i < txt.length) {
-    document.getElementById("type").innerHTML += txt.charAt(i);
+    document.getElementById("header").innerHTML += txt.charAt(i);
     i++;
     setTimeout(typeWriter, getRandomInt(min, max));
+  }
+}
+  
+  function typeWriterInstant() {
+  if (i < txt2.length) {
+    document.getElementById("entries").innerHTML += txt2.charAt(i);
+    i++;
+    setTimeout(typeWriter, 1));
   }
 }
   
@@ -176,6 +231,6 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
   }
   
   //load typewriter 500ms after site load
-  window.onload = setTimeout(typeWriter, 500) 
+  window.onload = setTimeout(typeWriter, 500), setTimeout(typeWriterInstant, 19000)
 </script>
 </html>
