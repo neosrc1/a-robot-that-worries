@@ -155,7 +155,7 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
   
   // declare variables -- text here
   var i = 0 
-  var txt = `A ROBOT THAT WORRIES - Do I express feelings or do I express values?
+  var txt = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
   The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.
   
   LOADING ENTRIES...` // text to be typewritten in header
@@ -206,20 +206,22 @@ One last look around, and then my vision fades away.`
   var min = 30 // minimum time per character (ms)
   var max = 90 // maximum time per character (ms)
   
-  // function for typewriting header
+  // insta-typewriting function, called during typeWriter()
+  function typeWriterInstant() {
+  if (i < txt2.length) {
+    document.getElementById("entries").innerHTML += txt2.charAt(i);
+    i++;
+    setTimeout(typeWriterInstant, 1));
+  }
+}
+  
+  // function for typewriting
   function typeWriter() {
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
     i++;
     setTimeout(typeWriter, getRandomInt(min, max));
-  }
-}
-  
-  function typeWriterInstant() {
-  if (i < txt2.length) {
-    document.getElementById("entries").innerHTML += txt2.charAt(i);
-    i++;
-    setTimeout(typeWriter, 1));
+  else setTimeout(typeWriterInstant, 3000)
   }
 }
   
@@ -231,6 +233,6 @@ One last look around, and then my vision fades away.`
   }
   
   //load typewriter 500ms after site load
-  window.onload = setTimeout(typeWriter, 500), setTimeout(typeWriterInstant, 19000)
+  window.onload = setTimeout(typeWriter, 500)
 </script>
 </html>
