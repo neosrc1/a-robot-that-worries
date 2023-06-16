@@ -234,7 +234,7 @@ One last look around, and then my vision fades away.
   
   function typeWriterInit() {
     beep();
-    setTimeout(typeWriterInstant(), 200)
+    setTimeout(typeWriterInstant(), 500)
   }
   
   // insta-typewriting function, called during typeWriter()
@@ -250,7 +250,8 @@ One last look around, and then my vision fades away.
   function typeWriter() {
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
-    tick();
+    if txt.charAt(i) != "\n"
+      tick();
     i++;
     setTimeout(typeWriter, getRandomInt(min, max));
   }
