@@ -229,8 +229,8 @@ This is at least better than being tested on. Returning to darkness... and being
 One last look around, and then my vision fades away.
 
 <\ END OF AVAILABLE ENTRIES - CHECK BACK LATER \>`
-  var min = 30 // minimum time per character (ms)
-  var max = 90 // maximum time per character (ms)
+  var min = 20 // minimum time per character (ms)
+  var max = 150 // maximum time per character (ms)
   
   function typeWriterInit() {
     beep();
@@ -251,7 +251,7 @@ One last look around, and then my vision fades away.
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
     if txt.charAt(i) != " "
-      tick();
+      tick()
     i++;
     setTimeout(typeWriter, getRandomInt(min, max));
   }
