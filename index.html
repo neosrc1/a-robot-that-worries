@@ -294,10 +294,10 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     setTimeout(typeWriterInstant, 1);
   }
   else {
-    if entryNumber < (amountEntries - 1) {
+    if (entryNumber < (amountEntries - 1)) {
       document.getElementById("navigateF").innerHTML = entryForward;
     }
-    if entryNumber > 0 {
+    if (entryNumber > 0) {
       document.getElementById("navigateB").innerHTML = entryBackward;
     }
   }
