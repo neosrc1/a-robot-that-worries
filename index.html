@@ -285,8 +285,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   
   // insta-typewriting function, called during typeWriter()
   function typeWriterInstant() {
-  if (i2 < txt2.length) {
-    document.getElementById("entries").innerHTML += txt2.slice(i2, i2 + 15);
+  if (i2 < entry[entryNumber].length) {
+    document.getElementById("entries").innerHTML += entry[entryNumber].slice(i2, i2 + 15);
     i2 += 15;
     setTimeout(typeWriterInstant, 1);
   }
