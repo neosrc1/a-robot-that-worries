@@ -305,7 +305,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     document.getElementById("navigateF").innerHTML = "";
     document.getElementById("navigateB").innerHTML = "";
     entryNumber++;
-    txt2 = entry[entryNumber];
+    i2 = 0;
     setTimeout(typeWriterInit, 400);
   }
   
@@ -314,7 +314,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     document.getElementById("navigateF").innerHTML = "";
     document.getElementById("navigateB").innerHTML = "";
     entryNumber--;
-    txt2 = entry[entryNumber];
+    i2 = 0;
     setTimeout(typeWriterInit, 400);
   }
   
@@ -337,7 +337,6 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
   
   function initDoc() {
-    txt2 = entry[0];
     var target = document.getElementById("hide");
     target.style.display = "none";
     typeWriter();
