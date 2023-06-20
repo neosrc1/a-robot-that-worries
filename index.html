@@ -277,7 +277,6 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   var max = 150 // maximum time per character (ms)
   
   const entry = [entry1, entry2]
-  txt2 = entry[0]
   
   function typeWriterInit() {
     beep();
@@ -334,6 +333,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
   
   function initDoc() {
+    txt2 = entry[0];
     var target = document.getElementById("hide");
     target.style.display = "none";
     typeWriter();
