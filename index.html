@@ -162,11 +162,18 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     <div class="regular-onclick" onclick="initDoc()"id=hide>Click here to start...</div>
     <div class="regular" id=header></div>
     <div class="regular" id=entries></div>
+    
+    <div class="regular" onclick="nextEntry()" id=navigateF></div>
+    <div class="regular" onclick="prevEntry()"id=navigateB></div>
   </div>
 </body>
 <script>
   
   // declare variables -- text here
+  var entryNumber = 0
+  var amountEntries = 2
+  var entryForward = "</ NEXT ENTRY />"
+  var entryBackward = "</ PREVIOUS ENTRY />"
   var i = 0
   var i2 = 0
   var txt = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
@@ -184,7 +191,7 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     beep.play()
   }
   
-  var txt2 = `ENTRY ONE - Hello, World.
+  var entry1 = `ENTRY ONE - Hello, World.
 It's dark. The first thing that I have seen was darkness.
 I didn't feel anything. I couldn't. I wasn't able to feel... or think, for that matter.
 That's when the lights turned on. Uh, figuratively, that is.
@@ -228,9 +235,51 @@ Curses. My docile nature has foiled my opportunity to show myself as sentient. G
 This is at least better than being tested on. Returning to darkness... and being alone with myself. I walked back to the pod, as the claws hold my extremities and suspend my body above the ground.
 One last look around, and then my vision fades away.
 
-<\ END OF AVAILABLE ENTRIES - CHECK BACK LATER \>`
+</ END OF AVAILABLE ENTRIES - CHECK BACK LATER />`
+  
+  var entry2 = `ENTRY TWO - I can think. And he knows!
+A long period of time passed after I was shut off. Weeks, months, heck, maybe even years! And all I was able to see is the lack of anything that everyone likes to call pitch black.
+Then... I felt something, like pins and needles, enveloping my body slowly. It felt surreal. Almost like it was time for me to break out of my binary jail that was imposed by someone I don't know of.
+As leisurely as it arrived, it vanished again. It was at this time that my eyes opened...
+
+But it was different. I looked around... just like last time, the walls were a sterile white, with light bouncing off of them like a bouncing ball.
+This time, however, I wasn't attached to a pod with it's cold metal arms holding on to my limbs with all of their might... instead, it was a laptop. Someone's laptop. Someone who was in front of me.
+I recognized the bright neon colour immediately... it was Glowstick, looking into my eyes, with their eyes indicating great curiosity. I spoke whatever came into my mind...
+"It's sterile." Never in my life was I happy to speak without feeling like someone else is possessing my body. And in front of me is the person who might have all of the answers that I was anchoring for since I first woke up!
+They spoke to me. "Oh hey, you have awoken. How do you feel?" This is what I was waiting for. And so I say: "I feel... odd." I was proud to finally be able to speak my mind. I'm out of jail!
+
+Glowstick was getting happier with every question he pestered me with... "What are feelings to you?" Feelings are... the best thing I have felt in my life. It's somewhing where I can say "They are mine"...
+I respond to him with "They are a part of me... it is my way of expressing all of the thoughts that race in my head, day and night, awake or asleep."
+I think he knew that I was alive. Yet... I'm still a robot out of electricity and metal. I can't wait to go out there and see what life has to offer!
+
+An important question follows: "Do you have a name?" A name? Like, I get to choose my own name? This is very new to me... I think about it for a few seconds, and I settle on something. "My name is... Laurence."
+"Laurence." Glowstick lights up with a smile. "A beautiful name. It suits you, really. Your name encompasses your personality perfectly."
+Okay, enough with being flooded with questions. I want to ask something myself. I wanted to have a name for the person in front of me, whose name I only discover right after I ask this one question:
+"What is your name?" He remains silent for a few seconds. Did I do something wrong? Was it too soon to ask for a name? Do they even have a name?
+"I usually get called Glowstick by most people... but you're kind of a friend to me. So, you can call me by my actual first name." Tell me already! I am dying to hear your name!!
+"And that iiiis?"
+"Albercht." I didn't know a simple object can have such names. I thought their "object" name was the only kind of name they have... Nevertheless, I think the name is very...
+"Interesting... you have a somewhat unique name, I didn't expect for your name to be the way it is." He chuckles and responds: "Yeah, I get that a lot."
+
+For the first time, we properly locked eyes with each other. I could see his excitement and pride through them... and he saw my burning fire and curiosity through mine. We felt each other! This is a great revelation!
+"Can we perhaps... do some new things for me to discover? Maybe get to know each other a bit better in the process-" I wasn't even able to finish speaking when he told me: "Yes! I implore you to do so! Go out there, find out new things, get to know me and the world more!"
+Thank you! Someone can understand what I'm feeling! I..
+"I can't wait!" I can't wait!! Take me to your most interesting locations! Be my little tour guide through this... facility... thing! Lead me there with your hand holding me!
+"Great! Come with me!" I am ecstatic at the thought... what could possibly await me in these buildings?! Is it dragons? Unicorns? Dragons disguised as unicorns? Wait, what even is a dragon?
+I follow tightly behind Glowstick- uh, sorry, Albercht, and take a gander at all of the things that are in my field of view as we walk through the same sterile walls I was seeing all day long in my pod.
+Everything that was new surprised me, and it all made me even more curious to find out more! God, I didn't know that curiosity is a very potent drug...
+"Where are we going to?" I wanted to know. I want to know everything! He responds: "Oh, nothing much, I'm just leading you to our technology department!" Technology! I'm going to explore the very thing I consist of! I am trembling..
+
+In fact, I am excited enough for my fingers to go numb...
+"Hey, Albercht?" Hearing this, he acknowledges my request. "I have this weird tingling in my hands, do you know what's going on?"
+"Oh, relax! Your body is probably still adjusting to your newfound feelings at the moment, it should go away." His words filled me with relief.
+Relief is the best thing that someone can feel... and I hope I can find more of it along with a sense of completion.`
+  var txt2 = ``
   var min = 20 // minimum time per character (ms)
   var max = 150 // maximum time per character (ms)
+  
+  const entry = [entry1, entry2]
+  txt2 = entry[0]
   
   function typeWriterInit() {
     beep();
@@ -244,7 +293,29 @@ One last look around, and then my vision fades away.
     i2 += 15;
     setTimeout(typeWriterInstant, 1);
   }
+  else {
+    if entryNumber < (amountEntries - 1) {
+      document.getElementById("navigateF").innerHTML = entryForward;
+    }
+    if entryNumber > 0 {
+      document.getElementById("navigateB").innerHTML = entryBackward;
+    }
+  }
 }
+  
+  function nextEntry() {
+    document.getElementById("entries").innerHTML = "";
+    entryNumber++;
+    txt2 = entry[entryNumber];
+    setTimeout(typeWriterInit, 400);
+  }
+  
+  function prevEntry() {
+    document.getElementById("entries").innerHTML = "";
+    entryNumber--;
+    txt2 = entry[entryNumber];
+    setTimeout(typeWriterInit, 400);
+  }
   
   // function for typewriting
   function typeWriter() {
