@@ -276,7 +276,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   var min = 20 // minimum time per character (ms)
   var max = 150 // maximum time per character (ms)
   
-  const entry = [entry1, entry2]
+  const entry = [entry1, entry2];
   
   function typeWriterInit() {
     beep();
@@ -302,6 +302,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   
   function nextEntry() {
     document.getElementById("entries").innerHTML = "";
+    document.getElementById("navigateF").innerHTML = "";
+    document.getElementById("navigateB").innerHTML = "";
     entryNumber++;
     txt2 = entry[entryNumber];
     setTimeout(typeWriterInit, 400);
@@ -309,6 +311,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   
   function prevEntry() {
     document.getElementById("entries").innerHTML = "";
+    document.getElementById("navigateF").innerHTML = "";
+    document.getElementById("navigateB").innerHTML = "";
     entryNumber--;
     txt2 = entry[entryNumber];
     setTimeout(typeWriterInit, 400);
