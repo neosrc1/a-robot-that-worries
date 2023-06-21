@@ -171,6 +171,7 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     <div class="regular" onclick="prevEntry()"id=navigateB></div>
   </div>
 </body>
+<script src="loopify.js" type="text/javascript"></script>
 <script>
   
   // declare variables -- text here
@@ -193,6 +194,10 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
   function beep() {
     let beep = new Audio('sfx/beep.mp3');
     beep.play()
+  }
+  function button() {
+    let button = new Audio('sfx/button.mp3');
+    button.play()
   }
   
   var entry1 = `ENTRY ONE - Hello, World.
@@ -281,6 +286,12 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   var txt2 = ``
   var min = 20 // minimum time per character (ms)
   var max = 150 // maximum time per character (ms)
+
+loopify("sfx/hum.mp3",function(err,loop) {
+  if (err) {
+    return console.err(err);
+  }
+});
   
   const entry = [entry1, entry2];
   
@@ -328,6 +339,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   
   // function for typewriting
   function typeWriter() {
+  loop.play();
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
     tick();
@@ -347,7 +359,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   function initDoc() {
     var target = document.getElementById("hide");
     target.style.display = "none";
-    typeWriter();
+    button.play();
+    setTimeout(typeWriter, 800)
   }
 </script>
 </html>
