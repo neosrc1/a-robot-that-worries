@@ -291,6 +291,8 @@ loopify("sfx/hum.mp3",function(err,loop) {
   if (err) {
     return console.err(err);
   }
+  loop.play();
+  loop.stop();
 });
   
   const entry = [entry1, entry2];
