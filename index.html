@@ -287,16 +287,22 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   var min = 20 // minimum time per character (ms)
   var max = 150 // maximum time per character (ms)
 
-loopify("sfx/hum.mp3",function(err,loop) {
-  if (err) {
-    return console.err(err);
-  }
-  loop.play();
-  loop.stop();
-});
+ loopify("sfx/hum.mp3",ready);
+    function ready(err,loop){
+      if (err) {
+        console.warn(err);
+      }
+      document.getElementById("hide").addEventListener("click",function(){
+        sleep(800)
+        loop.play();
+      });
   
   const entry = [entry1, entry2];
-  
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+      
   function typeWriterInit() {
     beep();
     setTimeout(typeWriterInstant(), 500)
@@ -341,7 +347,6 @@ loopify("sfx/hum.mp3",function(err,loop) {
   
   // function for typewriting
   function typeWriter() {
-  loopify.play();
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
     tick();
