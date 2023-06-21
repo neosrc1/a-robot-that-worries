@@ -341,7 +341,7 @@ loopify("sfx/hum.mp3",function(err,loop) {
   
   // function for typewriting
   function typeWriter() {
-  loop.play();
+  loopify.play();
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
     tick();
