@@ -199,6 +199,10 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     let button = new Audio('sfx/button.mp3');
     button.play()
   }
+  function button2() {
+    let button2 = new Audio('sfx/button2.mpy');
+    button2.play()
+  }
   
   var entry1 = `ENTRY ONE - Hello, World.
 It's dark. The first thing that I have seen was darkness.
@@ -332,7 +336,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     document.getElementById("navigateB").innerHTML = "";
     entryNumber++;
     i2 = 0;
-    scroll(0,0)
+    scroll(0,0);
+    button2();
     setTimeout(typeWriterInit, 400);
   }
   
@@ -342,7 +347,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     document.getElementById("navigateB").innerHTML = "";
     entryNumber--;
     i2 = 0;
-    scroll(0,0)
+    scroll(0,0);
+    button2();
     setTimeout(typeWriterInit, 400);
   }
   
