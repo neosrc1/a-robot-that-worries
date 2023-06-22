@@ -48,6 +48,7 @@
     z-index: 2;
     white-space: pre-line;
     overflow-wrap: break-word;
+    margin-bottom: 2vh;
 }
   .regular-onclick {
     font-family: monogram;
@@ -165,19 +166,19 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     </div>
     <div class="regular-onclick" onclick="initDoc()"id=hide>Click here to start...</div>
     <div class="regular" id=header></div>
-    <div class="regular" onclick="nextEntry()" id="navigateF" margin-top=2vh></div>
-    <div class="regular" onclick="prevEntry()" id="navigateB" margin-bottom=2vh></div>
+    <div class="regular" onclick="nextEntry()" id="navigateF"></div>
+    <div class="regular" onclick="prevEntry()" id="navigateB"></div>
     <div class="regular" id=entries></div>
   </div>
 </body>
 <script src="loopify.js" type="text/javascript"></script>
 <script>
   
-  // declare variables -- text here
-  var entryNumber = 0
-  var amountEntries = 2
-  var entryForward = "< NEXT ENTRY >"
-  var entryBackward = "< PREVIOUS ENTRY >"
+  // declare variables
+  var entryNumber = 0 // number of current entry (starts at 0, array index)
+  var amountEntries = 2 // total amount of entries, needed for rendering entryForward/entryBackward on demand
+  var entryForward = "< NEXT ENTRY >" // button text
+  var entryBackward = "< PREVIOUS ENTRY >" // button text
   var i = 0
   var i2 = 0
   var txt = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
@@ -286,72 +287,73 @@ In fact, I am excited enough for my fingers to go numb...
 "Oh, relax! Your body is probably still adjusting to your newfound feelings at the moment, it should go away." His words filled me with relief.
 Relief is the best thing that someone can feel... and I hope I can find more of it along with a sense of completion.
 `
-  var txt2 = ``
   var min = 20 // minimum time per character (ms)
   var max = 150 // maximum time per character (ms)
-
+  
+ // loopify for the computer hum
  loopify("sfx/hum.mp3",ready);
     function ready(err,loop){
       if (err) {
         console.warn(err);
       }
-      document.getElementById("hide").addEventListener("click",function(){
-        sleep(800)
-        loop.play();
+      document.getElementById("hide").addEventListener("click",function(){ // check if the "Click here to start..." text has been clicked
+        loop.play(); // start computer hum loop
       });
     }
-  
+
+  // array for entries
   const entry = [entry1, entry2];
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-      
+  // initializes instant typewriting, called after typeWriter()
   function typeWriterInit() {
     beep();
     setTimeout(typeWriterInstant(), 500)
   }
   
-  // insta-typewriting function, called during typeWriter()
+  // instant typewriting function, called after typeWriterInit()
   function typeWriterInstant() {
-  if (i2 < entry[entryNumber].length) {
-    document.getElementById("entries").innerHTML += entry[entryNumber].slice(i2, i2 + 15);
-    i2 += 15;
-    setTimeout(typeWriterInstant, 1);
-  }
-  else {
-    if (entryNumber < (amountEntries - 1)) {
+    if (entryNumber < (amountEntries - 1)) { // check if entryNumber is not the last entry
       document.getElementById("navigateF").innerHTML = entryForward;
     }
-    if (entryNumber > 0) {
+    if (entryNumber > 0) { // check if entryNumber is not the first entry
       document.getElementById("navigateB").innerHTML = entryBackward;
     }
+    typeWriterDo();
   }
-}
-  
-  function nextEntry() {
+
+  function typeWriterDo() { // does the instant typewriting - writes 15 characters at a time, repeats ASAP
+    if (i2 < entry[entryNumber].length) {
+      document.getElementById("entries").innerHTML += entry[entryNumber].slice(i2, i2 + 15);
+      i2 += 15;
+      typeWriterDo();
+    }
+
+  function flushNav() { // clears the entry and navigation divs, as well as an incrementing value
     document.getElementById("entries").innerHTML = "";
     document.getElementById("navigateF").innerHTML = "";
     document.getElementById("navigateB").innerHTML = "";
+    i2 = 0;
+  }
+
+  function resetToTop() { // scrolls you to the top and leads into typeWriterInit
+    scroll(0,0);
+    button2();
+    setTimeout(typeWriterInit, 400);
+  }
+  
+  function nextEntry() { // if the < NEXT ENTRY > button is pressed
+    flushNav();
     entryNumber++;
-    i2 = 0;
-    scroll(0,0);
-    button2();
-    setTimeout(typeWriterInit, 400);
+    resetToTop();
   }
   
-  function prevEntry() {
-    document.getElementById("entries").innerHTML = "";
-    document.getElementById("navigateF").innerHTML = "";
-    document.getElementById("navigateB").innerHTML = "";
+  function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
+    flushNav();
     entryNumber--;
-    i2 = 0;
-    scroll(0,0);
-    button2();
-    setTimeout(typeWriterInit, 400);
+    resetToTop();
   }
   
-  // function for typewriting
+  // function for typewriting, called after initDoc - writes one character at a time at random intervals
   function typeWriter() {
   if (i < txt.length) {
     document.getElementById("header").innerHTML += txt.charAt(i);
@@ -362,18 +364,20 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   else setTimeout(typeWriterInit, 3000)
 }
   
-  // random integer between min and max
+  // random integer between min and max, used for variance during typewriting
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
   
-  function initDoc() {
-    var target = document.getElementById("hide");
-    target.style.display = "none";
-    button();
-    setTimeout(typeWriter, 800)
+  function initDoc() { // when "Click here to start..." button is pressed
+    var target = document.getElementById("hide"); // get the aforementioned button
+    target.style.display = "none"; // hide it
+    button(); // button sfx
+    setTimeout(typeWriter, 800) // go to typeWriter()
   }
+
+  // nsrc 2023 - i'm just a pleb that barely knows how to code
 </script>
 </html>
