@@ -321,11 +321,11 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     typeWriterDo();
   }
 
-  function typeWriterDo() { // does the instant typewriting - writes 15 characters at a time, repeats ASAP
+  function typeWriterDo() { // does the instant typewriting - writes 15 characters at a time, repeats every 1ms to not be instant
     if (i2 < entry[entryNumber].length) {
       document.getElementById("entries").innerHTML += entry[entryNumber].slice(i2, i2 + 15);
       i2 += 15;
-      typeWriterDo();
+      setTimeout(typeWriterDo, 1);
     }
   }
 
