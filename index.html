@@ -66,8 +66,8 @@
     <div class="regular-onclick" onclick="initDoc()"id=hide>Click here to start...</div>
     <div class="regular" id=header></div>
     <div class="regular" id="hide2" style="margin-top: 2vh;"></div>
-    <div class="regular" onclick="nextEntry()" id="navigateF" style="margin-top: 2vh;"></div>
-    <div class="regular" onclick="prevEntry()" id="navigateB" style="margin-bottom: 2vh;"></div>
+    <div class="regular" onclick="nextEntry()" id="navigateF" style="margin-top: 2vh; user-select: none;"></div>
+    <div class="regular" onclick="prevEntry()" id="navigateB" style="margin-bottom: 2vh; user-select: none;"></div>
     <div class="regular" id=entries></div>
   </div>
 </body>
@@ -81,8 +81,6 @@
   var entryBackward = "< PREVIOUS ENTRY >" // button text
   var i = 0
   var i2 = 0
-  var fwDisabled = false
-  var bwDisabled = false
   var header = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
   The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.`
   var text = "LOADING ENTRIES..."
@@ -272,8 +270,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
   
   function nextEntry() { // if the < NEXT ENTRY > button is pressed
-    if (fwDisabled = true) { // check if entryNumber is the last entry
-      sfxDeny();
+    if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
       return;
     }
     if (i2 >= entry[entryNumber].length) {
@@ -287,8 +284,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
 }
     
   function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
-    if (bwDisabled = true) { // check if entryNumber is the first entry
-      sfxDeny();
+    if (entryNumber <= 0) { // check if entryNumber is the first entry
       return;
     }
     if (i2 >= entry[entryNumber].length) {
