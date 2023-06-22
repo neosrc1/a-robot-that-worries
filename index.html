@@ -203,6 +203,14 @@ vqdXN40UEbSvPH4E9nzgQR00CZOv9s6Z1vpusYdngBlY87jAsR
     let button2 = new Audio('sfx/button2.mp3');
     button2.play()
   }
+  function sfxDeny() {
+    let sfxDeny = new Audio('sfx/buzz.mp3');
+    sfxDeny.play()
+  }
+  function spinUp() {
+    let spinUp = new Audio('sfx/spinup.mp3');
+    spinUp.play()
+  }
   
   var entry1 = `ENTRY ONE - Hello, World.
 It's dark. The first thing that I have seen was darkness.
@@ -349,7 +357,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
       resetToTop();
     }
     else {
-      console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
+      warnEarly()
   }
 }
     
@@ -360,9 +368,14 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
       resetToTop();
     }
     else {
-      console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
+      warnEarly()
   }
 }
+
+  function warnEarly() {
+    sfxDeny();
+    console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
+  }
   
   // function for typewriting, called after initDoc - writes one character at a time at random intervals
   function typeWriter() {
@@ -372,7 +385,9 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     i++;
     setTimeout(typeWriter, getRandomInt(min, max));
   }
-  else setTimeout(typeWriterInit, 3000)
+  else {
+    spinUp();
+    setTimeout(typeWriterInit, 4500)
 }
   
   // random integer between min and max, used for variance during typewriting
