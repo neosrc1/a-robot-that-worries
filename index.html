@@ -366,7 +366,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   
   function initDoc() { // when "Click here to start..." button is pressed
     let target = document.getElementById("hide"); // get the aforementioned button
-    target.style.display = "none"; // hide it
+    target.innerHTML = ""; // hide it
     button(); // button sfx
     setTimeout(typeWriter, 800, document.getElementById("header"), header) // go to typeWriter()
   }
