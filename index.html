@@ -217,17 +217,15 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     document.getElementById("hide2").style.display = "none";
     let target1 = document.getElementById("navigateF");
     let target2 = document.getElementById("navigateB");
-    resetStyleNav(target1, entryForward, "nextEntry()");
-    resetStyleNav(target2, entryBackward, "prevEntry()");
+    resetStyleNav(target1, entryForward);
+    resetStyleNav(target2, entryBackward);
     if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
       let target = document.getElementById("navigateF");
       target.style.color = "darkgreen";
-      target.onclick = null;
     }
     if (entryNumber <= 0) { // check if entryNumber is the first entry
       let target = document.getElementById("navigateB");
       target.style.color = "darkgreen";
-      target.onclick = null;
     }
     setTimeout(typeWriterDo(), 500)
   }
@@ -251,16 +249,13 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     }
   }
 
-  function resetStyleNav(target, text, onclick) {
+  function resetStyleNav(target, text) {
     target.style.color = "lime";
     target.innerHTML = text;
-    target.onclick = onclick;
   }
 
   function flushNav() { // clears the entry and navigation divs, as well as an incrementing value
     document.getElementById("entries").innerHTML = "";
-    document.getElementById("navigateF").innerHTML = "";
-    document.getElementById("navigateB").innerHTML = "";
     i2 = 0;
   }
 
@@ -271,6 +266,10 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
   
   function nextEntry() { // if the < NEXT ENTRY > button is pressed
+    if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
+      sfxDeny();
+      return;
+    }
     if (i2 >= entry[entryNumber].length) {
       flushNav();
       entryNumber++;
@@ -282,6 +281,10 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
 }
     
   function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
+    if (entryNumber <= 0) { // check if entryNumber is the first entry
+      sfxDeny();
+      return;
+    }
     if (i2 >= entry[entryNumber].length) {
       flushNav();
       entryNumber--;
@@ -370,6 +373,8 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     bgt.innerHTML = stringList(40, 20)
   }
 
+  document.getElementById("navigateF").addEventListener("click", nextEntry);
+  document.getElementById("navigateB").addEventListener("click", prevEntry);
   window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom every 400ms
   
   // nsrc 2023 - i'm just a pleb that barely knows how to code
