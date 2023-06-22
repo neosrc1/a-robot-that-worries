@@ -51,7 +51,6 @@
 }
   .regular-onclick {
     font-family: monogram;
-    margin: 0 auto;
     border: 0px;
     color: lime;
     font-size: 3.33vw;
@@ -59,6 +58,7 @@
     z-index: 2;
     white-space: pre-line;
     overflow-wrap: break-word;
+    user-select: none;
 }  
 </style>
   <div class="container">
@@ -66,8 +66,8 @@
     <div class="regular-onclick" onclick="initDoc()"id=hide>Click here to start...</div>
     <div class="regular" id=header></div>
     <div class="regular" id="hide2" style="margin-top: 2vh;"></div>
-    <div class="regular" onclick="nextEntry()" id="navigateF" style="margin-top: 2vh; user-select: none;"></div>
-    <div class="regular" onclick="prevEntry()" id="navigateB" style="margin-bottom: 2vh; user-select: none;"></div>
+    <div class="regular" id="navigateF" style="margin-top: 2vh; user-select: none;"></div>
+    <div class="regular" id="navigateB" style="margin-bottom: 2vh; user-select: none;"></div>
     <div class="regular" id=entries></div>
   </div>
 </body>
@@ -271,6 +271,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   
   function nextEntry() { // if the < NEXT ENTRY > button is pressed
     if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
+      sfxDeny();
       return;
     }
     if (i2 >= entry[entryNumber].length) {
@@ -285,6 +286,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     
   function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
     if (entryNumber <= 0) { // check if entryNumber is the first entry
+      sfxDeny();
       return;
     }
     if (i2 >= entry[entryNumber].length) {
