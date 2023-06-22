@@ -221,12 +221,12 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     resetStyleNav(target2, entryBackward, "prevEntry()");
     if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
       let target = document.getElementById("navigateF");
-      target.style.color = darkgreen;
+      target.style.color = "darkgreen";
       target.onclick = null;
     }
     if (entryNumber <= 0) { // check if entryNumber is the first entry
       let target = document.getElementById("navigateB");
-      target.style.color = darkgreen;
+      target.style.color = "darkgreen";
       target.onclick = null;
     }
     setTimeout(typeWriterDo(), 500)
@@ -252,7 +252,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
 
   function resetStyleNav(target, text, onclick) {
-    target.style.color = lime;
+    target.style.color = "lime";
     target.innerHTML = text;
     target.onclick = onclick;
   }
