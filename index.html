@@ -343,16 +343,26 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
   
   function nextEntry() { // if the < NEXT ENTRY > button is pressed
-    flushNav();
-    entryNumber++;
-    resetToTop();
+    if (i2 >= entry[entryNumber].length) {
+      flushNav();
+      entryNumber++;
+      resetToTop();
+    }
+    else {
+      console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
   }
-  
+}
+    
   function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
-    flushNav();
-    entryNumber--;
-    resetToTop();
+    if (i2 >= entry[entryNumber].length) {
+      flushNav();
+      entryNumber--;
+      resetToTop();
+    }
+    else {
+      console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
   }
+}
   
   // function for typewriting, called after initDoc - writes one character at a time at random intervals
   function typeWriter() {
