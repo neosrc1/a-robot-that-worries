@@ -48,7 +48,6 @@
     z-index: 2;
     white-space: pre-line;
     overflow-wrap: break-word;
-    margin-bottom: 2vh;
 }
   .regular-onclick {
     font-family: monogram;
@@ -66,8 +65,9 @@
     <div class="background-text" id="bgtext"></div>
     <div class="regular-onclick" onclick="initDoc()"id=hide>Click here to start...</div>
     <div class="regular" id=header></div>
-    <div class="regular" onclick="nextEntry()" id="navigateF"></div>
-    <div class="regular" onclick="prevEntry()" id="navigateB"></div>
+    <div class="regular" id="hide2" style="margin-top: 2vh;"></div>
+    <div class="regular" onclick="nextEntry()" id="navigateF" style="margin-top: 2vh;"></div>
+    <div class="regular" onclick="prevEntry()" id="navigateB" style="margin-bottom: 2vh;"></div>
     <div class="regular" id=entries></div>
   </div>
 </body>
@@ -79,12 +79,10 @@
   var amountEntries = 2 // total amount of entries, needed for rendering entryForward/entryBackward on demand
   var entryForward = "< NEXT ENTRY >" // button text
   var entryBackward = "< PREVIOUS ENTRY >" // button text
-  var i = 0
   var i2 = 0
-  var txt = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
-  The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.
-  
-  LOADING ENTRIES...` // text to be typewritten in header
+  var header = `</ A ROBOT THAT WORRIES /> - Do I express feelings or do I express values?
+  The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.`
+  var text = "LOADING ENTRIES..."
   
   // audio sfx
   function tick() {
@@ -215,7 +213,22 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   // initializes instant typewriting, called after typeWriter()
   function typeWriterInit() {
     beep();
-    setTimeout(typeWriterInstant(), 500)
+    document.getElementById("hide2").style.display = "none";
+    let target1 = document.getElementById("navigateF");
+    let target2 = document.getElementById("navigateB");
+    resetStyleNav(target1, entryForward, "nextEntry()");
+    resetStyleNav(target2, entryBackward, "prevEntry()");
+    if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
+      let target = document.getElementById("navigateF");
+      target.style.color = darkgreen;
+      target.onclick = null;
+    }
+    if (entryNumber <= 0) { // check if entryNumber is the first entry
+      let target = document.getElementById("navigateB");
+      target.style.color = darkgreen;
+      target.onclick = null;
+    }
+    setTimeout(typeWriterDo(), 500)
   }
   
   // instant typewriting function, called after typeWriterInit()
@@ -235,6 +248,12 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
       i2 += 15;
       setTimeout(typeWriterDo, 1);
     }
+  }
+
+  function resetStyleNav(target, text, onclick) {
+    target.style.color = limegreen;
+    target.innerHTML = text;
+    target.onclick = onclick;
   }
 
   function flushNav() { // clears the entry and navigation divs, as well as an incrementing value
@@ -279,18 +298,30 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
   }
   
   // function for typewriting, called after initDoc - writes one character at a time at random intervals
-  function typeWriter() {
+  function typeWriterSpin(target, txt) {
+  let i = 0
   if (i < txt.length) {
-    document.getElementById("header").innerHTML += txt.charAt(i);
+    target.innerHTML += txt.charAt(i);
     tick();
     i++;
-    setTimeout(typeWriter, getRandomInt(min, max));
+    setTimeout(typeWriterSpin, getRandomInt(min, max), target, txt);
   }
   else {
     spinUp();
     setTimeout(typeWriterInit, 4800)
   }
 }
+  
+  function typeWriter(target, txt) {
+  let i = 0
+  if (i < txt.length) {
+    target.innerHTML += txt.charAt(i);
+    tick();
+    i++;
+    setTimeout(typeWriter, getRandomInt(min, max), target, txt);
+  }
+  else setTimeout(typeWriterSpin, 400, document.getElementById("hide2"), text)
+  } 
   
   // random integer between min and max, used for variance during typewriting
   function getRandomInt(min, max) {
@@ -327,7 +358,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     let target = document.getElementById("hide"); // get the aforementioned button
     target.style.display = "none"; // hide it
     button(); // button sfx
-    setTimeout(typeWriter, 800) // go to typeWriter()
+    setTimeout(typeWriter, 800, document.getElementById("header"), header) // go to typeWriter()
   }
 
   // generate bg text - 40 strings, each 20 characters long
