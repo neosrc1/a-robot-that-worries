@@ -76,7 +76,7 @@
   
   // declare variables
   var entryNumber = 0 // number of current entry (starts at 0, array index)
-  var amountEntries = 2 // total amount of entries, needed for rendering entryForward/entryBackward on demand
+  var amountEntries = entry.length; // total amount of entries, needed for rendering entryForward/entryBackward on demand
   var entryForward = "< NEXT ENTRY >" // button text
   var entryBackward = "< PREVIOUS ENTRY >" // button text
   var i = 0
@@ -194,6 +194,40 @@ In fact, I am excited enough for my fingers to go numb...
 "Oh, relax! Your body is probably still adjusting to your newfound feelings at the moment, it should go away." His words filled me with relief.
 Relief is the best thing that someone can feel... and I hope I can find more of it along with a sense of completion.
 `
+
+  var entry3 = `ENTRY THREE - Machine Learning... heh, funny pun.
+I enter the first room with Albercht. Inside there were a lot of things... too many to count, really! The first thing to catch my eye was a very futuristic looking rifle.
+"This is room TS01 - where we try and create weaponry of high calibers. I was sure you were going to like this, so I brought you here first!" He was right with every word he said... it really was intriguing to look at!
+Very sophisticated technology, ballistic weapons, unconventional ones as well - This was a field day for me! I spent a lot of time asking a few of the coworkers about things.
+
+They explained how the current prototype for an anti-material rifle is supposed to work. Apparently, the weapon uses copious amounts of electricity to propel a special projectile at high speeds... this projectile was carefully crafted to fly at supersonic speeds without disintegrating into dust. Fascinating!
+"We are making this prototype for a newly instated squad of the country's military unit. They specifically stated that we should use the most powerful tech that we can scrounge together..." Someone said that.
+The person is tall, they look like a microphone and they emit a warm red light. Also, their voice is... somewhat robotic... Their name I later found out to be Myc, and this wasn't the only time I'd see them. According to someone else, their purpose was to make sure the weapon was still within certain weapon regulations. I doubt that thing is legal though.
+
+"Soooo... what should we do here?" My inquiry was recieved by Albercht. "For now, we can just hang out in here, perhaps work on the new rifle with everyone else."
+That sounds exciting!
+"That sounds exciting!" I just noticed how brutally honest I was. Why would people lie? To hide things that they don't want to show? No, that can't be it. I don't think that people are this evil... No, I'm just being ridiculous. Surely, they'd have no reason to hurt me, right?
+"Yes, it is exciting if you see it for the first time and volunteer to help. If it's part of work, then it will probably be less fun." Work... I inquire: "What do people work for?" "Well, to earn money so that they can live."
+
+"What is the concept of money? Is it like... a token to prolong your life?" He laughs. What? Was my question that stupid? Please, be respectful... I'm only human- wait... "What? No, you need it to buy a home, aquire food, purchase hobby goods, et cetera. Funny joke, though!"
+Uhh... thanks? What's a joke? "What are jokes?" "Well, a joke is something you tell where you intend the other person to laugh, usually by saying something outrageous, or clever." I think I understand what Albercht said... maybe I'll test it.
+"So.. If I say "Machine Learning", is that a joke?" He chuckles at it. I succeeded! 🎉 "Kind of! It's a pun, and puns can be funny when cleverly made." I should definitely make a list of cool jokes and puns to get him laughing more! I like seeing people laugh.
+
+A coworker started talking to Albercht. "Hey, why is the rifle robot here? Shouldn't it be back in RS34?" He paused for a second, then responded: "Oh, no, I was going to get a weapon from here so I can analyze its data in the shooting range in MS15."
+They seemed to understand. "Okay, my bad. Good luck!" After saying that, the person walked off. Does that mean that we're going here to get a rifle to shoot with? I thought we were here to work on the prototype!
+"Didn't we want to work on the rifle here?" I was trying to clear my confusion. He said two different things! It's... a contradiction. He whispered: "I had to lie to him, since they aren't supposed to know that you are alive..." Wait, so Albercht gave me my conscience, even though he wasn't allowed to? I'm touched...
+I nodded and pretended everything was normal. Pretending feels bad... but I feel like I have to.
+
+We worked on the project there for a bit, and I got to learn about technology. Truly extraordinary wonders... I want to really know how all of this works. I'm hooked!
+There goes that tingling again... and it's a bit stronger than last time. "Hey, my hands are going numb again. I'm starting to get worried." Albercht doesn't hesitate: "Again, it's very likely just your body getting used to your current state of mind. It should subside, just give it a bit."
+"Okay..." I guess I'll just wait it out until I can't feel it anymore. And it does go away.
+
+Is life about having fun? Everyone seems to only do the things that they like to do, and next to nothing that they don't want to do. I ask him about it: "Is life about having fun?"
+"Pretty much." Great! My life is supposed to be fun! And it really is fun! "How's that working out for you?" His face turns into a more worried one... did I ask a bad question? Is that my fault? Tell me! "...maybe you should reserve that question for a later date."
+I am having a hard time understanding why... What about it makes it so... bad?
+
+There's things that I certainly need to figure out and learn. But hey! What I am doing right now is a great first step!`
+  
   var min = 20 // minimum time per character (ms)
   var max = 150 // maximum time per character (ms)
   
@@ -209,7 +243,7 @@ Relief is the best thing that someone can feel... and I hope I can find more of 
     }
 
   // array for entries
-  const entry = [entry1, entry2];
+  const entry = [entry1, entry2, entry3];
 
   // initializes instant typewriting, called after typeWriter()
   function typeWriterInit() {
