@@ -246,6 +246,11 @@ There's things that I certainly need to figure out and learn. But hey! What I am
       document.getElementById("hide").addEventListener("click",function(){ // check if the "Click here to start..." text has been clicked
         loop.play(); // start computer hum loop
       });
+      document.addEventListener("keydown", function(event) {
+                           if (event.ctrlKey && event.key === "k") {
+                             loop.play();
+                           }
+                        });
     }
 
 
@@ -426,7 +431,7 @@ There's things that I certainly need to figure out and learn. But hey! What I am
   document.getElementById("navigateF").addEventListener("click", nextEntry);
   document.getElementById("navigateB").addEventListener("click", prevEntry);
   document.addEventListener("keydown", function(event) {
-                           if (event.ctrlKey && event.key === "p") {
+                           if (event.ctrlKey && event.key === "k") {
                              initDocSkip()
                            }
                         });
