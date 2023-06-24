@@ -213,7 +213,7 @@ That sounds exciting!
 
 "What is the concept of money? Is it like... a token to prolong your life?" He laughs. What? Was my question that stupid? Please, be respectful... I'm only human- wait... "What? No, you need it to buy a home, aquire food, purchase hobby goods, et cetera. Funny joke, though!"
 Uhh... thanks? What's a joke? "What are jokes?" "Well, a joke is something you tell where you intend the other person to laugh, usually by saying something outrageous, or clever." I think I understand what Albercht said... maybe I'll test it.
-"So.. If I say "Machine Learning", is that a joke?" He chuckles at it. I succeeded! 🎉 "Kind of! It's a pun, and puns can be funny when cleverly made." I should definitely make a list of cool jokes and puns to get him laughing more! I like seeing people laugh.
+"So.. If I say "Machine Learning", is that a joke?" He chuckles at it. I succeeded! "Kind of! It's a pun, and puns can be funny when cleverly made." I should definitely make a list of cool jokes and puns to get him laughing more! I like seeing people laugh.
 
 A coworker started talking to Albercht. "Hey, why is the rifle robot here? Shouldn't it be back in RS34?" He paused for a second, then responded: "Oh, no, I was going to get a weapon from here so I can analyze its data in the shooting range in MS15."
 They seemed to understand. "Okay, my bad. Good luck!" After saying that, the person walked off. Does that mean that we're going here to get a rifle to shoot with? I thought we were here to work on the prototype!
@@ -410,6 +410,13 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     setTimeout(typeWriter, 800, document.getElementById("header"), header) // go to typeWriter()
   }
 
+  function initDocSkip() {
+    let target = document.getElementById("hide");
+    target.innerHTML = "";
+    document.getElementById("header").innerHTML = header;
+    typeWriterInit()
+  }
+
   // generate bg text - 40 strings, each 20 characters long
   function bgTextRandom() {
     let bgt = document.getElementById("bgtext");
@@ -418,6 +425,12 @@ There's things that I certainly need to figure out and learn. But hey! What I am
 
   document.getElementById("navigateF").addEventListener("click", nextEntry);
   document.getElementById("navigateB").addEventListener("click", prevEntry);
+  document.addEventListener("keydown", function(event) {
+                           if (event.ctrlKey && event.key === "p") {
+                             initDocSkip()
+                           }
+                        });
+  
   window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom every 400ms
   
   // nsrc 2023 - i'm just a pleb that barely knows how to code
