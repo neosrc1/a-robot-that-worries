@@ -77,15 +77,15 @@
 
   
   // declare variables
-  var entryNumber = 0 // number of current entry (starts at 0, array index)
-  var amountEntries = 3 // total amount of entries, needed for rendering entryForward/entryBackward on demand
-  var entryForward = "< NEXT ENTRY >" // button text
-  var entryBackward = "< PREVIOUS ENTRY >" // button text
-  var i = 0
-  var i2 = 0
-  var header = `< A ROBOT THAT WORRIES > - Do I express feelings or do I express values?
+  let entryNumber = 0 // number of current entry (starts at 0, array index)
+  let amountEntries = 3 // total amount of entries, needed for rendering entryForward/entryBackward on demand
+  let entryForward = "< NEXT ENTRY >" // button text
+  let entryBackward = "< PREVIOUS ENTRY >" // button text
+  let i = 0
+  let i2 = 0
+  let header = `< A ROBOT THAT WORRIES > - Do I express feelings or do I express values?
   The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.`
-  var text = "LOADING ENTRIES..."
+  let text = "LOADING ENTRIES..."
   
   // audio sfx
   function tick() {
@@ -113,7 +113,7 @@
     spinUp.play()
   }
   
-  var entry1 = `ENTRY ONE - Hello, World.
+  let entry1 = `ENTRY ONE - Hello, World.
 It's dark. The first thing that I have seen was darkness.
 I didn't feel anything. I couldn't. I wasn't able to feel... or think, for that matter.
 That's when the lights turned on. Uh, figuratively, that is.
@@ -158,7 +158,7 @@ This is at least better than being tested on. Returning to darkness... and being
 One last look around, and then my vision fades away.
 `
   
-  var entry2 = `ENTRY TWO - I can think. And he knows!
+  let entry2 = `ENTRY TWO - I can think. And he knows!
 A long period of time passed after I was shut off. Weeks, months, heck, maybe even years! And all I was able to see is the lack of anything that everyone likes to call pitch black.
 Then... I felt something, like pins and needles, enveloping my body slowly. It felt surreal. Almost like it was time for me to break out of my binary jail that was imposed by someone I don't know of.
 As leisurely as it arrived, it vanished again. It was at this time that my eyes opened...
@@ -197,7 +197,7 @@ In fact, I am excited enough for my fingers to go numb...
 Relief is the best thing that someone can feel... and I hope I can find more of it along with a sense of completion.
 `
 
-  var entry3 = `ENTRY THREE - Machine Learning... heh, funny pun.
+  let entry3 = `ENTRY THREE - Machine Learning... heh, funny pun.
 I enter the first room with Albercht. Inside there were a lot of things... too many to count, really! The first thing to catch my eye was a very futuristic looking rifle.
 "This is room TS01 - where we try and create weaponry of high calibers. I was sure you were going to like this, so I brought you here first!" He was right with every word he said... it really was intriguing to look at!
 Very sophisticated technology, ballistic weapons, unconventional ones as well - This was a field day for me! I spent a lot of time asking a few of the coworkers about things.
@@ -234,8 +234,8 @@ There's things that I certainly need to figure out and learn. But hey! What I am
   // array for entries
   const entry = [entry1, entry2, entry3];
   
-  var min = 20 // minimum time per character (ms)
-  var max = 150 // maximum time per character (ms)
+  let min = 20 // minimum time per character (ms)
+  let max = 150 // maximum time per character (ms)
   
  // loopify for the computer hum
  loopify("sfx/hum.mp3",ready);
@@ -261,19 +261,15 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     document.getElementById("hide2").style.display = "none";
     let target1 = document.getElementById("navigateF");
     let target2 = document.getElementById("navigateB");
-    resetStyleNav(target1, entryForward);
-    resetStyleNav(target2, entryBackward);
+    resetStyle(target1, entryForward);
+    resetStyle(target2, entryBackward);
     if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
       let target = document.getElementById("navigateF");
       target.style.color = "darkgreen";
-      fwDisabled = true
-      bwDisabled = false
     }
     if (entryNumber <= 0) { // check if entryNumber is the first entry
       let target = document.getElementById("navigateB");
       target.style.color = "darkgreen";
-      bwDisabled = true
-      fwDisabled = false
     }
     setTimeout(typeWriterDo(), 500)
   }
@@ -297,12 +293,12 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     }
   }
 
-  function resetStyleNav(target, text) {
+  function resetStyle(target, text) {
     target.style.color = "lime";
     target.innerHTML = text;
   }
 
-  function flushNav() { // clears the entry and navigation divs, as well as an incrementing value
+  function flushEntry() { // clears the entry and navigation divs, as well as an incrementing value
     document.getElementById("entries").innerHTML = "";
     i2 = 0;
   }
@@ -319,7 +315,7 @@ There's things that I certainly need to figure out and learn. But hey! What I am
       return;
     }
     if (i2 >= entry[entryNumber].length) {
-      flushNav();
+      flushEntry();
       entryNumber++;
       resetToTop();
     }
@@ -334,7 +330,7 @@ There's things that I certainly need to figure out and learn. But hey! What I am
       return;
     }
     if (i2 >= entry[entryNumber].length) {
-      flushNav();
+      flushEntry();
       entryNumber--;
       resetToTop();
     }
