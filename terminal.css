@@ -1,0 +1,64 @@
+@font-face {
+    font-family: monogram;
+    src: url("monogram.ttf")
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+    overflow-y: visible;
+    overflow-clip-margin: -2px;
+  }
+
+  .container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .background-text {
+    font-family: monogram;
+    border: 0px;
+    color: transparent;
+    font-size: 12vw;
+    word-wrap: break-all;
+    z-index: -100;
+    position: absolute;
+    text-shadow: 0 0 2vw #074007;
+    letter-spacing: 4vw;
+    padding-left: 1.5vw;
+    user-select: none;
+    text-align: left;
+    line-height: 8vw;
+  }
+
+  body {
+    background-color: #101010
+  }
+
+  .regular {
+    font-family: monogram;
+    border: 0px;
+    color: lime;
+    font-size: 3.33vw;
+    padding-left: 1vw;
+    text-shadow: 0 0 3.5vw lime;
+    text-align: left;
+    z-index: 2;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    line-height: 3vw;
+  }
+
+  .regular-onclick {
+    font-family: monogram;
+    border: 0px;
+    color: lime;
+    font-size: 3.33vw;
+    text-shadow: 0 0 3.5vw lime;
+    z-index: 2;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    user-select: none;
+    line-height: 3vw;
+  }

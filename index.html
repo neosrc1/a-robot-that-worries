@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>A ROBOT THAT WORRIES</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <meta property="og:image" content="https://neosrc1.github.io/a-robot-that-worries/a%20robot%20that%20worries%20favicon%201k.png" />
+  <meta property="og:image"
+    content="https://neosrc1.github.io/a-robot-that-worries/a%20robot%20that%20worries%20favicon%201k.png" />
   <meta property="og:image:width" content="1024" />
   <meta property="og:image:height" content="1024" />
   <meta property="og:site_name" content="A ROBOT THAT WORRIES" />
@@ -11,67 +13,15 @@
   <meta property="og:title" content="</ AWAITING USER RESPONSE />" />
   <meta property="og:url" content="https://neosrc1.github.io/a-robot-that-worries/index.html" />
   <meta property="og:description" content="The story of a robot who discovers himself and the humans around him." />
+  <link rel="stylesheet" href="terminal.css">
 </head>
+
 <body>
-<style>
-  @font-face {
-    font-family: monogram;
-    src: url("monogram.ttf")
-  }
-  html, body {
-    overflow-x: clip;
-    overflow-y: visible;
-    overflow-clip-margin: -2px;
-  }
-  .container {
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
-  .background-text {
-    font-family: monogram;
-    border: 0px;
-    color: transparent;
-    font-size: 12vw;
-    word-wrap: break-all;
-    z-index: -100;
-    position: absolute;
-    text-shadow: 0 0 2vw #074007;
-    letter-spacing: 4vw;
-    padding-left: 1.5vw;
-    user-select: none;
-    text-align: left;
-  }
-  body {
-    background-color: #101010
-  }
-  .regular {
-    font-family: monogram;
-    border: 0px;
-    color: lime;
-    font-size: 3.33vw;
-    padding-left: 1vw;
-    text-shadow: 0 0 3.5vw lime;
-    text-align: left;
-    z-index: 2;
-    white-space: pre-line;
-    overflow-wrap: break-word;
-}
-  .regular-onclick {
-    font-family: monogram;
-    border: 0px;
-    color: lime;
-    font-size: 3.33vw;
-    text-shadow: 0 0 3.5vw lime;
-    z-index: 2;
-    white-space: pre-line;
-    overflow-wrap: break-word;
-    user-select: none;
-}  
-</style>
+  
   <div class="container">
     <div class="background-text" id="bgtext"></div>
-    <div class="regular-onclick" onclick="initDoc()"id=hide>Click here to start... (or, alternatively, you can press Ctrl+K if you want to skip the animation)</div>
+    <div class="regular-onclick" onclick="initDoc()" id=hide>Click here to start... (or, alternatively, you can press
+      Ctrl+K if you want to skip the animation)</div>
     <div class="regular" id=header></div>
     <div class="regular" id="hide2" style="margin-top: 2vh;"></div>
     <div class="regular" id="navigateF" style="margin-top: 2vh; user-select: none;"></div>
@@ -83,7 +33,7 @@
 <script>
 
 
-  
+
   // declare variables
   let entryNumber = 0 // number of current entry (starts at 0, array index)
   let amountEntries = 3 // total amount of entries, needed for rendering entryForward/entryBackward on demand
@@ -94,7 +44,7 @@
   let header = `< A ROBOT THAT WORRIES > - Do I express feelings or do I express values?
   The long-lost story of one of the most advanced robots that has ever existed. It was created with intent, but released by accident.`
   let text = "LOADING ENTRIES..."
-  
+
   // audio sfx
   function tick() {
     let tick = new Audio('sfx/tick.mp3');
@@ -120,7 +70,7 @@
     let spinUp = new Audio('sfx/spinup.mp3');
     spinUp.play()
   }
-  
+
   let entry1 = `ENTRY ONE - Hello, World.
 It's dark. The first thing that I have seen was darkness.
 I didn't feel anything. I couldn't. I wasn't able to feel... or think, for that matter.
@@ -165,7 +115,7 @@ Curses. My docile nature has foiled my opportunity to show myself as sentient. G
 This is at least better than being tested on. Returning to darkness... and being alone with myself. I walked back to the pod, as the claws hold my extremities and suspend my body above the ground.
 One last look around, and then my vision fades away.
 `
-  
+
   let entry2 = `ENTRY TWO - I can think. And he knows!
 A long period of time passed after I was shut off. Weeks, months, heck, maybe even years! And all I was able to see is the lack of anything that everyone likes to call pitch black.
 Then... I felt something, like pins and needles, enveloping my body slowly. It felt surreal. Almost like it was time for me to break out of my binary jail that was imposed by someone I don't know of.
@@ -241,25 +191,25 @@ There's things that I certainly need to figure out and learn. But hey! What I am
 
   // array for entries
   const entry = [entry1, entry2, entry3];
-  
+
   let min = 20 // minimum time per character (ms)
   let max = 150 // maximum time per character (ms)
-  
- // loopify for the computer hum
- loopify("sfx/hum.mp3",ready);
-    function ready(err,loop){
-      if (err) {
-        console.warn(err);
-      }
-      document.getElementById("hide").addEventListener("click",function(){ // check if the "Click here to start..." text has been clicked
-        loop.play(); // start computer hum loop
-      });
-      document.addEventListener("keydown", function(event) {
-                           if (event.ctrlKey && event.key === "k") {
-                             loop.play();
-                           }
-                        });
+
+  // loopify for the computer hum
+  loopify("sfx/hum.mp3", ready);
+  function ready(err, loop) {
+    if (err) {
+      console.warn(err);
     }
+    document.getElementById("hide").addEventListener("click", function () { // check if the "Click here to start..." text has been clicked
+      loop.play(); // start computer hum loop
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.ctrlKey && event.key === "k") {
+        loop.play();
+      }
+    });
+  }
 
 
 
@@ -281,7 +231,7 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     }
     setTimeout(typeWriterDo(), 500)
   }
-  
+
   // instant typewriting function, called after typeWriterInit()
   function typeWriterInstant() {
     if (entryNumber < (amountEntries - 1)) { // check if entryNumber is not the last entry
@@ -312,11 +262,11 @@ There's things that I certainly need to figure out and learn. But hey! What I am
   }
 
   function resetToTop() { // scrolls you to the top and leads into typeWriterInit
-    scroll(0,0);
+    scroll(0, 0);
     button2();
     setTimeout(typeWriterInit, 400);
   }
-  
+
   function nextEntry() { // if the < NEXT ENTRY > button is pressed
     if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
       sfxDeny();
@@ -329,9 +279,9 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     }
     else {
       warnEarly()
+    }
   }
-}
-    
+
   function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
     if (entryNumber <= 0) { // check if entryNumber is the first entry
       sfxDeny();
@@ -344,43 +294,43 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     }
     else {
       warnEarly()
+    }
   }
-}
 
   // if a navigation button is pressed before the entry is done rendering, play buzz sfx and log a warn in the console
   function warnEarly() {
     sfxDeny();
     console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
   }
-  
+
   // function for typewriting, called after initDoc - writes one character at a time at random intervals
   function typeWriterSpin(target, txt) {
-  if (i < txt.length) {
-    target.innerHTML += txt.charAt(i);
-    tick();
-    i++;
-    setTimeout(typeWriterSpin, getRandomInt(min, max), target, txt);
+    if (i < txt.length) {
+      target.innerHTML += txt.charAt(i);
+      tick();
+      i++;
+      setTimeout(typeWriterSpin, getRandomInt(min, max), target, txt);
+    }
+    else {
+      i = 0
+      spinUp();
+      setTimeout(typeWriterInit, 4800)
+    }
   }
-  else {
-    i = 0
-    spinUp();
-    setTimeout(typeWriterInit, 4800)
-  }
-}
-  
+
   function typeWriter(target, txt) {
-  if (i < txt.length) {
-    target.innerHTML += txt.charAt(i);
-    tick();
-    i++;
-    setTimeout(typeWriter, getRandomInt(min, max), target, txt);
+    if (i < txt.length) {
+      target.innerHTML += txt.charAt(i);
+      tick();
+      i++;
+      setTimeout(typeWriter, getRandomInt(min, max), target, txt);
+    }
+    else {
+      i = 0
+      setTimeout(typeWriterSpin, 400, document.getElementById("hide2"), text)
+    }
   }
-  else {
-    i = 0
-    setTimeout(typeWriterSpin, 400, document.getElementById("hide2"), text)
-  }
-  } 
-  
+
   // random integer between min and max, used for variance during typewriting
   function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -399,7 +349,7 @@ There's things that I certainly need to figure out and learn. But hey! What I am
       counter += 1;
     }
     return result;
-}
+  }
 
   // generate string list w/ newlines with set string amount and string length
   function stringList(amount, length) {
@@ -411,7 +361,7 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     }
     return cache;
   }
-  
+
   function initDoc() { // when "Click here to start..." button is pressed
     let target = document.getElementById("hide"); // get the aforementioned button
     target.innerHTML = ""; // hide it
@@ -434,14 +384,15 @@ There's things that I certainly need to figure out and learn. But hey! What I am
 
   document.getElementById("navigateF").addEventListener("click", nextEntry);
   document.getElementById("navigateB").addEventListener("click", prevEntry);
-  document.addEventListener("keydown", function(event) {
-                           if (event.ctrlKey && event.key === "k") {
-                             initDocSkip()
-                           }
-                        });
-  
+  document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && event.key === "k") {
+      initDocSkip()
+    }
+  });
+
   window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom every 400ms
-  
+
   // nsrc 2023 - i'm just a pleb that barely knows how to code
 </script>
+
 </html>
