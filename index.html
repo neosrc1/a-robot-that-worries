@@ -20,12 +20,12 @@
   
   <div class="container">
     <div class="background-text" id="bgtext"></div>
-    <div class="regular-onclick" onclick="initDoc()" id=hide>Click here to start... (or, alternatively, you can press
-      Ctrl+K if you want to skip the animation)</div>
+    <div class="regular-onclick" onclick="initDoc()" id=hide>Click here to start...</div>
+    <div class="regular-onclick" onclick="initDocSkip()" id=hideSec style="font-size: 2vw; color: rgb(14, 94, 14)">(Or click here to load the entries without animations)</div>
     <div class="regular" id=header></div>
     <div class="regular" id="hide2" style="margin-top: 2vh;"></div>
-    <div class="regular" id="navigateF" style="margin-top: 2vh; user-select: none;"></div>
-    <div class="regular" id="navigateB" style="margin-bottom: 2vh; user-select: none;"></div>
+    <div class="regular" id="navigateF" style="margin-top: 2vh; user-select: none; line-height: 3.33vw;"></div>
+    <div class="regular" id="navigateB" style="margin-bottom: 2vh; user-select: none; line-height: 3.33vw;"></div>
     <div class="regular" id=entries></div>
   </div>
 </body>
@@ -203,6 +203,9 @@ There's things that I certainly need to figure out and learn. But hey! What I am
     }
     document.getElementById("hide").addEventListener("click", function () { // check if the "Click here to start..." text has been clicked
       loop.play(); // start computer hum loop
+    })
+    document.getElementById("hideSec").addEventListener("click", function () { // check if the "Click here to start..." text has been clicked
+      loop.play(); // start computer hum loop
     });
     document.addEventListener("keydown", function (event) {
       if (event.ctrlKey && event.key === "k") {
@@ -365,6 +368,8 @@ There's things that I certainly need to figure out and learn. But hey! What I am
   function initDoc() { // when "Click here to start..." button is pressed
     let target = document.getElementById("hide"); // get the aforementioned button
     target.innerHTML = ""; // hide it
+    let target2 = document.getElementById("hideSec");
+    target2.innerHTML = "";
     button(); // button sfx
     setTimeout(typeWriter, 800, document.getElementById("header"), header) // go to typeWriter()
   }
@@ -372,6 +377,8 @@ There's things that I certainly need to figure out and learn. But hey! What I am
   function initDocSkip() {
     let target = document.getElementById("hide");
     target.innerHTML = "";
+    let target2 = document.getElementById("hideSec");
+    target2.innerHTML = "";
     document.getElementById("header").innerHTML = header;
     typeWriterInit()
   }
