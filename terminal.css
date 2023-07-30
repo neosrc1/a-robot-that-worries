@@ -39,7 +39,7 @@
   .regular {
     font-family: monogram;
     border: 0px;
-    color: lime;
+    color: rgb(0, 255, 0);
     font-size: 3.33vw;
     padding-left: 1vw;
     text-shadow: 0 0 3.5vw lime;
