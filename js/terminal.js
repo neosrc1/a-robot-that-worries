@@ -445,7 +445,7 @@ function indexGen() {
     target.innerHTML += entry[3].slice(0, 4214);
     target.innerHTML += "<span id='easterEgg'>link</span>";
     target.innerHTML += entry[3].slice(4218)
-    target.addEventListener("click", function () {
+    document.getElementById("easterEgg").addEventListener("click", function () {
       window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
     });
  }
