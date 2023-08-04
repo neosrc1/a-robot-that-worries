@@ -1,0 +1,68 @@
+@font-face {
+    font-family: ibm;
+    src: url(../fonts/Web437_IBM_VGA_9x16.woff);
+}
+html,
+body {
+  overflow-x: clip;
+  overflow-y: visible;
+  overflow-clip-margin: -2px;
+}
+
+body {
+    background-color: #000000
+  }
+
+.regular {
+    font-family: ibm;
+    border: 0px;
+    color: rgb(255, 255, 255);
+    font-size: 3vw;
+    padding-left: 1vw;
+    text-shadow: 0 0 1.5vw rgba(255, 255, 255, 0.5);
+    text-align: left;
+    z-index: 2;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    line-height: 4.9vh;
+    letter-spacing: 0.17vw;
+  }
+
+  .background-text {
+    font-family: ibm;
+    border: 0px;
+    color: transparent;
+    font-size: 6vw;
+    word-wrap: break-all;
+    z-index: -100;
+    position: absolute;
+    text-shadow: 0 0 1vw #383838;
+    letter-spacing: 2.5vw;
+    padding-left: 1.5vw;
+    user-select: none;
+    text-align: left;
+    line-height: 6.55vw;
+  }
+
+input {
+  position: relative;
+  width: 98%;
+  height: 2.2vw;
+  border: 0px;
+  background-color: transparent;
+  color: white;
+  font-family: ibm;
+  font-size: 3vw;
+}
+
+input:focus {
+  position: relative;
+  width: 98%;
+  height: 2.2vw;
+  border: 0px;
+  background-color: transparent;
+  color: white;
+  font-family: ibm;
+  font-size: 3vw;
+  outline: none;
+}

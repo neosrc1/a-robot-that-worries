@@ -1,10 +1,15 @@
- // declare variables
- let entryNumber = 0 // number of current entry (starts at 0, array index)
- let amountEntries = 3 // total amount of entries, needed for rendering entryForward/entryBackward on demand
+if (localStorage.getItem("entryNumber") === null) {
+  localStorage.setItem("entryNumber", "0")
+}
+
+// declare variables
+ let entryNumber = parseInt(localStorage.getItem("entryNumber")) // number of current entry (starts at 0, array index)
+ let amountEntries = 4 // total amount of entries, needed for rendering entryForward/entryBackward on demand
  let entryForward = "<span id=999999>" + "<\\NEXT ENTRY\\>" + "</span>" // button text
  let entryBackward = "<span id=1000000>" + "<\\PREVIOUS ENTRY\\>" + "</span>" // button text
  let i = 0
  let i2 = 0
+ let count = 0
  let header = `<\\A ROBOT THAT WORRIES\\> - Do I express feelings or do I express values?
  The long-lost story of one of the most advanced robots to date.
  It was created with intent, but released by accident.`
@@ -153,9 +158,39 @@ I am having a hard time understanding why... What about it makes it so... bad?
 
 There's things that I certainly need to figure out and learn. But hey! What I am doing right now is a great first step!`
 
+let entry4 = `ENTRY FOUR - You don't know what you've got until it's gone... temporarily.
+"Man, that project surely was fun to work on!" Albercht and I were wrapping up our little experiment there, since he told me that he wanted to show me something else. This day keeps getting better and better!
+"Glad you loved it! You're probably going to love this next thing too, then." As we both walked to wherever Albercht went, I couldn't help myself but stare at the liquid for a long time... it was moving, the substance was scattering, the individual drops that formed from a big wave created beautiful ripples that permeated the surface of it... so mesmerizing!
+He noted this and said in a playful tone: "Hey, what's the matter?" I'd come to realize that I was staring at it for minutes... whoops. O_O
+"Oh, nothing, I was just looking at your... liquid." He laughs. "You think it looks cool?" YES. Yes, it does. It does look cool enough for my eyes to stick to it like glue... "Yeah! It's mesmerizing to look at."
+
+Albercht smiles. "You remind me of our boss Cassie... just a tad bit." Wait, I haven't heard that name before! Cassie... "Who is that?" My curiosity is at an all time high as he opens his mouth to speak...
+"Cassie is our facility leader, she's pretty cheery all of the time and also likes to obsess over the smallest of details, haha... although Cassie is only her nickname." Surprisingly, that's the first mention of a female person I have yet to hear... why is that?
+
+Maybe that's not important right now... what are nicknames? "Nickname?" "Yeah, nicknames are funny names you can call somebody if they themselves are okay with it. Often those are shorter versions of a name, but sometimes they're unique." Oh, I get it. Cassie is short for something...
+"So if I call you Al, is that a nickname?" His face turns into one of confusion... "Uhh... yeah, that would be my shortened name, but please don't ever use that one again." Awh... Would've been a cool nickname. Wonder if I can call myself nicknames? ...I don't have any ideas though.
+
+Glowstick and I both arrive in a room. I've learned to read the signs by now - this one should be QR05. Inside are tons of technological items, like computers, tablets and the likes... but there's also some sort of glass fragments. My curiosity spikes again!
+"This is a pretty experimental thing that the facility is working on. We only specialize in robotics, but this right here is where we work on advanced metaphysics." Metaphysics, metaphysics.. interesting word... "What does that mean?"
+He starts to think for a bit... "Now, this is insanely hard to explain, so I'll just give you the most exciting details - we're messing around with time and space." My jaw drops. We get to time travel? Like in the movies?! :O
+"Wow... sounds intriguing." "It really is. Although most of the stuff in here we can't actually do anything with, due to certain risks. Only a handful of selected personnel can do anything meaningful in here." Oh... we aren't allowed to do anything in here. But that doesn't stop me from being excited!
+Then something vibrates... "Oh, I'm being rung. I'll be away for a few minutes!" He leaves the room. Well... this is unexpected. Now I'm here in this room that I am not supposed to be in, without Glowstick, only myself, and the things around me. But what am I saying, it's going to be fine!
+...it's totally not fine, please come back as soon as possible!!
+
+I didn't begin to think how I would be without someone around me. Since I woke up, I haven't been alone even once! And now I'm in the worst spot to be in when you're alone... Fear begins to overtake me. Then that tingling again.. it's stronger this time!
+With a sense of urgency, I look around. Oh right, the technological devices! Surely I can use a tablet or something to ring Albercht! I walk towards one of the tablets... but before I could even touch it, a loud bang occured. Oh no, was it a staff member that caught me in here?!
+I'm scared. I need help! Did something explode? I jumped back out of fear and looked at the door. No one? Phew. At least I didn't get caught in here without anyone else to speak of.
+I looked at the device again. It didn't look much different, but... I felt a link between myself and the tablet... Good lord, what did I do? Why did this happen? The tingling disappeared after that sound came though..
+
+Glowstick rushes in. "I heard a loud noise, did something happen?" Yes, something happened! But what happened? I don't know myself!! "I don't know, I went near the devices and then that sound happened..."
+He definitely notices how fearful I am. I beg you, help me!
+"Are you okay? You don't look too good-" "NO! I was in fear as soon as you left me and I don't know what the tingling is supposed to mean!!"
+He gets somewhat calmer. "Okay, okay, let's just... leave the room and I'll bring you to somewhere where you can stay for now, alright?" Yes, please! Anything is better than being in this room! "A- Alright..."
+
+We walk out. I am thankful this was over, but I'm hoping the next things I encounter are less... intimidating.`
 
  // array for entries
- const entry = [entry1, entry2, entry3];
+ const entry = [entry1, entry2, entry3, entry4];
 
  let min = 20 // minimum time per character (ms)
  let max = 150 // maximum time per character (ms)
@@ -179,37 +214,30 @@ There's things that I certainly need to figure out and learn. But hey! What I am
    });
  }
 
-
+function indexGen() {
+  let target = document.getElementById("index");
+  let insertIndex = "<span id=" + count + "-index onclick='seekEntry(" + count + ")'>[" + (count + 1) + "] </span>"
+  if (count < amountEntries) {
+    target.innerHTML += insertIndex;
+    count++;
+    indexGen();
+  }
+}
 
  // initializes instant typewriting, called after typeWriter()
  function typeWriterInit() {
    beep();
    document.getElementById("hide2").style.display = "none";
-   let target1 = document.getElementById("navigateF");
-   let target2 = document.getElementById("navigateB");
-   resetStyle(target1, entryForward);
-   resetStyle(target2, entryBackward);
-   if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
-     let target = document.getElementById("navigateF");
-     target.style.color = "darkgreen";
-     target.style.textShadow = "0 0 3.5vw darkgreen";
-   }
-   if (entryNumber <= 0) { // check if entryNumber is the first entry
-     let target = document.getElementById("navigateB");
-     target.style.color = "darkgreen";
-     target.style.textShadow = "0 0 3.5vw darkgreen";
-   }
+   indexGen();
+   let target3 = document.getElementById((entryNumber) + "-index");
+   target3.style.color = "darkgreen";
+   target3.style.textShadow = "0 0 3.5vw darkgreen";
+   localStorage.setItem("entryNumber", entryNumber)
    setTimeout(typeWriterDo(), 500)
  }
 
  // instant typewriting function, called after typeWriterInit()
  function typeWriterInstant() {
-   if (entryNumber < (amountEntries - 1)) { // check if entryNumber is not the last entry
-     document.getElementById("navigateF").innerHTML = entryForward;
-   }
-   if (entryNumber > 0) { // check if entryNumber is not the first entry
-     document.getElementById("navigateB").innerHTML = entryBackward;
-   }
    typeWriterDo();
  }
 
@@ -222,6 +250,9 @@ There's things that I certainly need to figure out and learn. But hey! What I am
      phosphorus(i2, rgbLimit)
      i2 += 15;
      setTimeout(typeWriterDo, 1);
+   }
+   if (i2 >= entry[entryNumber].length && entryNumber == 3) {
+    setTimeout(easterEgg, 3000)
    }
  }
 
@@ -256,6 +287,23 @@ There's things that I certainly need to figure out and learn. But hey! What I am
      warnEarly()
    }
  }
+
+ function seekEntry(entryNum) {
+    if (entryNum == entryNumber) {
+      sfxDeny();
+      return;
+    }
+    if (i2 >= entry[entryNumber].length) {
+      flushEntry();
+      let textIndex = "[" + (entryNumber + 1) + "] "
+      resetStyle(document.getElementById(entryNumber + "-index"), textIndex)
+      entryNumber = entryNum;
+      resetToTop();
+    }
+    else {
+      warnEarly()
+    }
+ } 
 
  function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
    if (entryNumber <= 0) { // check if entryNumber is the first entry
@@ -367,8 +415,6 @@ There's things that I certainly need to figure out and learn. But hey! What I am
    bgt.innerHTML = stringList(40, 20)
  }
 
- document.getElementById("navigateF").addEventListener("click", nextEntry);
- document.getElementById("navigateB").addEventListener("click", prevEntry);
  document.addEventListener("keydown", function (event) {
    if (event.ctrlKey && event.key === "k") {
      initDocSkip()
@@ -391,6 +437,17 @@ There's things that I certainly need to figure out and learn. But hey! What I am
         insert = 'span[id="' + id + '"]'
         $(insert).contents().unwrap();
     }
+ }
+
+ function easterEgg() {
+    let target = document.getElementById("entries");
+    target.innerHTML = "";
+    target.innerHTML += entry[3].slice(0, 4214);
+    target.innerHTML += "<span id='easterEgg'>link</span>";
+    target.innerHTML += entry[3].slice(4218)
+    target.addEventListener("click", function () {
+      window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
+    });
  }
 
  window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom every 400ms
