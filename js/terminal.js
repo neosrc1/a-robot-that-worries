@@ -439,12 +439,12 @@ function indexGen() {
  function easterEgg() {
     let target = document.getElementById("entries");
     if (entryNumber == 3) {
-      target.innerHTML = "";
-      target.innerHTML += entry[3].slice(0, 4214);
-      target.innerHTML += "<span id='easterEgg'>link</span>";
-      target.innerHTML += entry[3].slice(4218)
-      target.addEventListener("click", function () {
-        window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
+    target.innerHTML = "";
+    target.innerHTML += entry[3].slice(0, 4214);
+    target.innerHTML += "<span id='easterEgg'>link</span>";
+    target.innerHTML += entry[3].slice(4218)
+    document.getElementById("easterEgg").addEventListener("click", function () {
+      window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
     });
   }
  }
