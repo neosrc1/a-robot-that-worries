@@ -47,7 +47,7 @@ function typeWriter(target, txt) {
     }
   }
 
-  document.addEventListener("keydown", function(event) {
+  document.addEventListener("keyup", function(event) {
     if (document.getElementById("login").value != "" && event.key == "Enter") {
         compare(document.getElementById("login").value);
 
