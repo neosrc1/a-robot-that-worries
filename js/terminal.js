@@ -14,7 +14,7 @@ if (localStorage.getItem("entryNumber") === null) {
  The long-lost story of one of the most advanced robots to date.
  It was created with intent, but released by accident.`
  let text = "LOADING ENTRIES..."
- let rgbLimit = 128
+ let rgbLimit = 160
 
  // audio sfx
  function tick() {
@@ -245,9 +245,9 @@ function indexGen() {
    if (i2 < entry[entryNumber].length) {
      let target = document.getElementById("entries");
      let word = entry[entryNumber].slice(i2, i2 + 15);
-     let insert = "<span id=" + i2 + " style='color: rgb(128, 255, 128); text-shadow: 0 0 3.5vw rgb(128, 255, 128)'>" + word + "</span>"
+     let insert = "<span id=" + i2 + " style='color: rgb(" + rgbLimit + ", 255, " + rgbLimit + "); text-shadow: 0 0 3.5vw rgb(" + rgbLimit + ", 255, " + rgbLimit + ")'>" + word + "</span>"
      target.innerHTML += insert
-     phosphorus(i2, rgbLimit)
+     phosphorus(i2, rgbLimit, 16)
      i2 += 15;
      setTimeout(typeWriterDo, 1);
    }
@@ -296,7 +296,7 @@ function indexGen() {
     if (i2 >= entry[entryNumber].length) {
       flushEntry();
       let textIndex = "[" + (entryNumber + 1) + "] "
-      resetStyle(document.getElementById(entryNumber + "-index"), textIndex)
+      resetStyle(document.getElementById(entryNumber + "-index"), textIndex);
       entryNumber = entryNum;
       resetToTop();
     }
@@ -333,7 +333,7 @@ function indexGen() {
      if (i < txt.length) {
         target.innerHTML += insert;
         tick();
-        phosphorus(i, rgbLimit);
+        phosphorus(i, rgbLimit, 16);
         i++;
         setTimeout(typeWriterSec, getRandomInt(min, max), target, txt);
    }
@@ -350,7 +350,7 @@ function indexGen() {
      let insert = "<span id=" + i + " style='color: rgb(128, 255, 128); text-shadow: 0 0 3.5vw rgb(128, 255, 128)'>" + word + "</span>"
      target.innerHTML += insert;
      tick();
-     phosphorus(i, rgbLimit)
+     phosphorus(i, rgbLimit, 16)
      i++;
      setTimeout(typeWriter, getRandomInt(min, max), target, txt);
    }
@@ -421,18 +421,15 @@ function indexGen() {
    }
  });
 
- function phosphorus(id, temp) {
+ function phosphorus(id, temp, speed) {
     target = document.getElementById(id);
-    var tempR = temp;
-    var G = 255;
-    var tempB = temp;
-    tempR -= 16;
-    tempB -= 16;
-    if (tempR != 0) {
-        var rgbValue = "rgb(" + tempR + ", " + G + ", " + tempB + ")";
+    var tempValue = temp;
+    tempValue -= speed;
+    if (tempValue != 0) {
+        var rgbValue = "rgb(" + tempValue + ", " + 255 + ", " + tempValue + ")";
         target.style.color = rgbValue
         target.style.textShadow = "0 0 3.5vw " + rgbValue
-        setTimeout(phosphorus, 25, id, tempR)
+        setTimeout(phosphorus, 25, id, tempValue, speed)
     } else {
         insert = 'span[id="' + id + '"]'
         $(insert).contents().unwrap();
@@ -441,13 +438,15 @@ function indexGen() {
 
  function easterEgg() {
     let target = document.getElementById("entries");
-    target.innerHTML = "";
-    target.innerHTML += entry[3].slice(0, 4214);
-    target.innerHTML += "<span id='easterEgg'>link</span>";
-    target.innerHTML += entry[3].slice(4218)
-    target.addEventListener("click", function () {
-      window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
+    if (entryNumber == 3) {
+      target.innerHTML = "";
+      target.innerHTML += entry[3].slice(0, 4214);
+      target.innerHTML += "<span id='easterEgg'>link</span>";
+      target.innerHTML += entry[3].slice(4218)
+      target.addEventListener("click", function () {
+        window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
     });
+  }
  }
 
  window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom every 400ms
