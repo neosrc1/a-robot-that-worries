@@ -1,6 +1,7 @@
 let i = 0
 let count = 0
 let textWhoRU = "who r u? "
+let flag = false
 const users = ["NSS", "Laurence", "Albercht", "Glowstick", "Myc", "Coffee Cup", "Soda", "neosrc", "FRIEND", "Pixely"]
 const responseNSS = "we haven't met yet, u crazy man"
 const responseSelf = "haha, very funny, plz give me ur actual name"
@@ -44,11 +45,14 @@ function typeWriter(target, txt) {
     }
     else {
       i = 0
+      if (flag == true) {
+        flag = false
+      }
     }
   }
 
   document.addEventListener("keyup", function(event) {
-    if (document.getElementById("login").value != "" && event.key == "Enter" && i == 0) {
+    if (event.key == "Enter" && i == 0) {
         compare(document.getElementById("login").value);
 
     }
@@ -62,13 +66,18 @@ function typeWriter(target, txt) {
 
   function compare(input) {
     const cache = input
+    const target = document.getElementById("login");
     document.getElementById("response").innerHTML = "";
+    if (flag == true ) {
+      return;
+    }
     if (count < 10) {
-        let match = input.localeCompare(users[count], 'en', {sensitivity: 'base'});
+        let match = cache.localeCompare(users[count], 'en', {sensitivity: 'base'});
         if (match == 0) {
             typeResponse(document.getElementById("response"), responses[count]);
-            document.getElementById("login").value = "";
+            target.value = "";
             count = 0;
+            flag = true;
             return
         }
         else {
@@ -76,12 +85,20 @@ function typeWriter(target, txt) {
             compare(cache);
         }
     }
-    else {
-        typeResponse(document.getElementById("response"), responseWhenNoneApplies);
-        document.getElementById("login").value = "";
-        count = 0
+    if ((target.value == "" || target.value == null) && flag != true) {
+      typeResponse(document.getElementById("response"), responseNone);
+      count = 0;
+      flag = true;
+      return
     }
-  }
+    if ((target.value != "" || target.value != null) && count == 10 && flag != true) {
+        document.getElementById("login").value = "";
+        typeResponse(document.getElementById("response"), responseWhenNoneApplies);
+        count = 0
+        flag = true
+        return
+        }
+    }
 
   function makeid(length) {
     let result = '';

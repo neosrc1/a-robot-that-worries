@@ -46,23 +46,24 @@ body {
 
 input {
   position: relative;
-  width: 98%;
-  height: 2.2vw;
+  width: 95%;
+  height: 2.5vw;
   border: 0px;
   background-color: transparent;
   color: white;
   font-family: ibm;
   font-size: 3vw;
+  line-height: 3.5vw;
 }
 
 input:focus {
   position: relative;
-  width: 98%;
-  height: 2.2vw;
+  width: 95%;
   border: 0px;
   background-color: transparent;
   color: white;
   font-family: ibm;
   font-size: 3vw;
+  line-height: 3.5vw;
   outline: none;
 }

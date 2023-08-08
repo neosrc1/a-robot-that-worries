@@ -159,6 +159,7 @@ I am having a hard time understanding why... What about it makes it so... bad?
 There's things that I certainly need to figure out and learn. But hey! What I am doing right now is a great first step!`
 
 let entry4 = `ENTRY FOUR - You don't know what you've got until it's gone... temporarily.
+
 "Man, that project surely was fun to work on!" Albercht and I were wrapping up our little experiment there, since he told me that he wanted to show me something else. This day keeps getting better and better!
 "Glad you loved it! You're probably going to love this next thing too, then." As we both walked to wherever Albercht went, I couldn't help myself but stare at the liquid for a long time... it was moving, the substance was scattering, the individual drops that formed from a big wave created beautiful ripples that permeated the surface of it... so mesmerizing!
 He noted this and said in a playful tone: "Hey, what's the matter?" I'd come to realize that I was staring at it for minutes... whoops. O_O
@@ -252,7 +253,7 @@ function indexGen() {
      setTimeout(typeWriterDo, 1);
    }
    if (i2 >= entry[entryNumber].length && entryNumber == 3) {
-    setTimeout(easterEgg, 3000)
+    setTimeout(easterEgg, 1000)
    }
  }
 
@@ -440,9 +441,9 @@ function indexGen() {
     let target = document.getElementById("entries");
     if (entryNumber == 3) {
     target.innerHTML = "";
-    target.innerHTML += entry[3].slice(0, 4214);
+    target.innerHTML += entry[3].slice(0, 4215);
     target.innerHTML += "<span id='easterEgg'>link</span>";
-    target.innerHTML += entry[3].slice(4218)
+    target.innerHTML += entry[3].slice(4219)
     document.getElementById("easterEgg").addEventListener("click", function () {
       window.open('https://neosrc1.github.io/a-robot-that-worries/hlink.html')
     });
