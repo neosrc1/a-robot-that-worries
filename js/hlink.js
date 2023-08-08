@@ -48,7 +48,7 @@ function typeWriter(target, txt) {
   }
 
   document.addEventListener("keyup", function(event) {
-    if (document.getElementById("login").value != "" && event.key == "Enter") {
+    if (document.getElementById("login").value != "" && event.key == "Enter" && i == 0) {
         compare(document.getElementById("login").value);
 
     }
