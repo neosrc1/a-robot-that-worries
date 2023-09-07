@@ -1,3 +1,4 @@
+// set localStorage item "entryNumber" to the first entry if there is not yet an item with the aforementioned name
 if (localStorage.getItem("entryNumber") === null) {
   localStorage.setItem("entryNumber", "0")
 }
@@ -5,11 +6,9 @@ if (localStorage.getItem("entryNumber") === null) {
 // declare variables
  let entryNumber = parseInt(localStorage.getItem("entryNumber")) // number of current entry (starts at 0, array index)
  let amountEntries = 4 // total amount of entries, needed for rendering entryForward/entryBackward on demand
- let entryForward = "<span id=999999>" + "<\\NEXT ENTRY\\>" + "</span>" // button text
- let entryBackward = "<span id=1000000>" + "<\\PREVIOUS ENTRY\\>" + "</span>" // button text
  let i = 0
  let i2 = 0
- let count = 0
+ let indexGeneratedYN = 0
  let header = `<\\A ROBOT THAT WORRIES\\> - Do I express feelings or do I express values?
  The long-lost story of one of the most advanced robots to date.
  It was created with intent, but released by accident.`
@@ -42,6 +41,7 @@ if (localStorage.getItem("entryNumber") === null) {
    spinUp.play()
  }
 
+ // entries - don't touch the literals
  let entry1 = `ENTRY ONE - Hello, World.
  It's dark. The first thing that I have seen was darkness.
  I didn't feel anything. I couldn't. I wasn't able to feel... or think, for that matter.
@@ -205,24 +205,26 @@ We walk out. I am thankful this was over, but I'm hoping the next things I encou
    document.getElementById("hide").addEventListener("click", function () { // check if the "Click here to start..." text has been clicked
      loop.play(); // start computer hum loop
    })
-   document.getElementById("hideSec").addEventListener("click", function () { // check if the "Click here to start..." text has been clicked
+   document.getElementById("hideSec").addEventListener("click", function () { // check if the "Skip animations" text has been clicked
      loop.play(); // start computer hum loop
-   });
-   document.addEventListener("keydown", function (event) {
-     if (event.ctrlKey && event.key === "k") {
-       loop.play();
-     }
    });
  }
 
+
+// create the index elements
 function indexGen() {
-  let target = document.getElementById("index");
-  let insertIndex = "<span id=" + count + "-index onclick='seekEntry(" + count + ")'>[" + (count + 1) + "] </span>"
-  if (count < amountEntries) {
-    target.innerHTML += insertIndex;
-    count++;
-    indexGen();
+  if (indexGeneratedYN == 0) {
+    let target = document.getElementById("index");
+    for (let count = 0; count < amountEntries; count++) { // if the function has not cycled through every entry yet
+      let insertIndex = "<span id=" + count + "-index onclick='seekEntry(" + count + ")'> [" + (count + 1) + "] </span>"
+      target.innerHTML += insertIndex;
+    }
+    indexGeneratedYN = 1
   }
+  else {
+    return
+  }
+  
 }
 
  // initializes instant typewriting, called after typeWriter()
@@ -230,20 +232,12 @@ function indexGen() {
    beep();
    document.getElementById("hide2").style.display = "none";
    indexGen();
-   let target3 = document.getElementById((entryNumber) + "-index");
-   target3.style.color = "darkgreen";
-   target3.style.textShadow = "0 0 3.5vw darkgreen";
-   localStorage.setItem("entryNumber", entryNumber)
+   localStorage.setItem("entryNumber", entryNumber);
    setTimeout(typeWriterDo(), 500)
  }
 
- // instant typewriting function, called after typeWriterInit()
- function typeWriterInstant() {
-   typeWriterDo();
- }
-
  function typeWriterDo() { // does the instant typewriting - writes 15 characters at a time, repeats every 1ms to not be instant
-   if (i2 < entry[entryNumber].length) {
+   if (i2 < entry[entryNumber].length) { // check if current entry is done typing
      let target = document.getElementById("entries");
      let word = entry[entryNumber].slice(i2, i2 + 15);
      let insert = "<span id=" + i2 + " style='color: rgb(" + rgbLimit + ", 255, " + rgbLimit + "); text-shadow: 0 0 3.5vw rgb(" + rgbLimit + ", 255, " + rgbLimit + ")'>" + word + "</span>"
@@ -252,15 +246,9 @@ function indexGen() {
      i2 += 15;
      setTimeout(typeWriterDo, 1);
    }
-   if (i2 >= entry[entryNumber].length && entryNumber == 3) {
+   if (i2 >= entry[entryNumber].length && entryNumber == 3) { // check if current entry is done typing and is the fourth entry
     setTimeout(easterEgg, 1000)
    }
- }
-
- function resetStyle(target, text) {
-   target.style.color = "lime";
-   target.style.textShadow = "0 0 3.5vw lime";
-   target.innerHTML = text;
  }
 
  function flushEntry() { // clears the entry and navigation divs, as well as an incrementing value
@@ -274,30 +262,16 @@ function indexGen() {
    setTimeout(typeWriterInit, 400);
  }
 
- function nextEntry() { // if the < NEXT ENTRY > button is pressed
-   if (entryNumber >= (amountEntries - 1)) { // check if entryNumber is the last entry
-     sfxDeny();
-     return;
-   }
-   if (i2 >= entry[entryNumber].length) {
-     flushEntry();
-     entryNumber++;
-     resetToTop();
-   }
-   else {
-     warnEarly()
-   }
- }
-
- function seekEntry(entryNum) {
-    if (entryNum == entryNumber) {
+ function seekEntry(entryNum) { // seek to entry that corresponds to the index item that was clicked
+    if (entryNum == entryNumber) { // check if clicked item corresponds to the entry that is currently being viewed
       sfxDeny();
       return;
     }
-    if (i2 >= entry[entryNumber].length) {
+    if (i2 >= entry[entryNumber].length) { // check to see if current entry is done typing
       flushEntry();
-      let textIndex = "[" + (entryNumber + 1) + "] "
-      resetStyle(document.getElementById(entryNumber + "-index"), textIndex);
+      target = document.getElementById(entryNum + '-index')
+      
+      phosphorus(entryNum + '-index', rgbLimit, 16);
       entryNumber = entryNum;
       resetToTop();
     }
@@ -306,28 +280,13 @@ function indexGen() {
     }
  } 
 
- function prevEntry() { // if the < PREVIOUS ENTRY > button is pressed
-   if (entryNumber <= 0) { // check if entryNumber is the first entry
-     sfxDeny();
-     return;
-   }
-   if (i2 >= entry[entryNumber].length) {
-     flushEntry();
-     entryNumber--;
-     resetToTop();
-   }
-   else {
-     warnEarly()
-   }
- }
-
  // if a navigation button is pressed before the entry is done rendering, play buzz sfx and log a warn in the console
  function warnEarly() {
    sfxDeny();
    console.warn("You are trying to access an entry before the current one has been fully rendered. Please wait!")
  }
-
- // function for typewriting, called after initDoc - writes one character at a time at random intervals
+ 
+ // same function as the one below, plays spin sfx and calls for typeWriterInit after it is done
  function typeWriterSec(target, txt) {
      let word = txt.charAt(i);
      let insert = "<span id=" + i + " style='color: rgb(128, 255, 128); text-shadow: 0 0 3.5vw rgb(128, 255, 128)'>" + word + "</span>";
@@ -344,7 +303,7 @@ function indexGen() {
         setTimeout(typeWriterInit, 4800)
  }
 }
-
+ // function for typewriting, called after initDoc - writes one character at a time at random intervals, calls for typeWriterSec after it is done
  function typeWriter(target, txt) {
    if (i < txt.length) {
      let word = txt.charAt(i);
@@ -374,7 +333,7 @@ function indexGen() {
    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
    const charactersLength = characters.length;
    let counter = 0;
-   while (counter < length) {
+   while (counter < length) { // while the amount of generated characters is smaller than requested length
      result += characters.charAt(Math.floor(Math.random() * charactersLength));
      counter += 1;
    }
@@ -385,7 +344,7 @@ function indexGen() {
  function stringList(amount, length) {
    let cache = "";
    let counter = 0;
-   while (counter < amount) {
+   while (counter < amount) { // while the amount of generated strings is smaller than the requested amount
      cache += makeid(length) + "\n";
      counter += 1;
    }
@@ -398,10 +357,10 @@ function indexGen() {
    let target2 = document.getElementById("hideSec");
    target2.innerHTML = "";
    button(); // button sfx
-   setTimeout(typeWriter, 800, document.getElementById("header"), header) // go to typeWriter()
+   setTimeout(typeWriter, 800, document.getElementById("header"), header) // call for typeWriter()
  }
 
- function initDocSkip() {
+ function initDocSkip() { // load typeWriterInit() directly, skipping typeWriter() and typeWriterSec()
    let target = document.getElementById("hide");
    target.innerHTML = "";
    let target2 = document.getElementById("hideSec");
@@ -416,26 +375,33 @@ function indexGen() {
    bgt.innerHTML = stringList(40, 20)
  }
 
- document.addEventListener("keydown", function (event) {
-   if (event.ctrlKey && event.key === "k") {
-     initDocSkip()
-   }
- });
-
+ // give a text object an "afterglow"
  function phosphorus(id, temp, speed) {
-    target = document.getElementById(id);
-    var tempValue = temp;
+  let pattern = /index/
+  let target = document.getElementById(id);
+  if (pattern.test(id)) {
+    $().contents().unwrap();
+  }
+  try {
+    let tempValue = temp;
     tempValue -= speed;
-    if (tempValue != 0) {
+    if (tempValue >= 0) { // if the colour is not back to normal
         var rgbValue = "rgb(" + tempValue + ", " + 255 + ", " + tempValue + ")";
         target.style.color = rgbValue
         target.style.textShadow = "0 0 3.5vw " + rgbValue
         setTimeout(phosphorus, 25, id, tempValue, speed)
     } else {
         insert = 'span[id="' + id + '"]'
+        if (pattern.test(id)) { // if the text object is not an index item
+          return;
+        }
         $(insert).contents().unwrap();
     }
  }
+ catch (error) { // catch ReferenceErrors and discard them
+  console.error(error)
+ }
+}
 
  function easterEgg() {
     let target = document.getElementById("entries");
@@ -450,6 +416,6 @@ function indexGen() {
   }
  }
 
- window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom every 400ms
+ window.onload = setInterval(bgTextRandom, 400) // executes bgTextRandom() every 400ms
 
  // nsrc 2023 - i'm just a pleb that barely knows how to code
