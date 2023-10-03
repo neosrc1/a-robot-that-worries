@@ -37,8 +37,8 @@ function animate() {
 	if (i >= 0) camera.position.z = -(mod * (Math.pow(i/2, 2))) + 7
 	i--
 	mod -= i/2 * 0.00005
-	cube.rotation.x += 0.03;
-	cube.rotation.y += 0.0267;
+	cube.rotation.x += 0.012;
+	cube.rotation.y += 0.010;
        renderer.render( scene, camera );
 
        delta = delta % interval;
