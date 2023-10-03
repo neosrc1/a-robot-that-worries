@@ -11,7 +11,8 @@
   }
 
   .container {
-    position: relative;
+    filter: url(#f1);
+    position: absolute;
     height: 100%;
     width: 100%;
   }
