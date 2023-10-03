@@ -20,7 +20,7 @@ var yVal = -1
 var zVal = -1
 let clock = new THREE.Clock();
 let delta = 0;
-let interval = 1 / 24;
+let interval = 1 / 60;
 
 camera.position.z = 225;
 let i = 50
